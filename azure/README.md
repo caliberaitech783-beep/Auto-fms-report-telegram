@@ -35,6 +35,9 @@ Storage, timer execution, data transfer and other charges still apply. An ₹800
 resource-group budget alert supports the user's ₹1,000 monthly target; budgets
 are alerts rather than hard caps. If the daily generation allowance is exhausted,
 remaining generation waits until the next date. Delivery retries continue.
+Incomplete dates are retained in a per-fleet backlog and generated oldest first
+when the next day's allowance is available. PDFs already generated for those dates
+are restored to avoid recreating and resending them during catch-up.
 
 ## Build and verification
 

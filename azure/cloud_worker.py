@@ -121,7 +121,20 @@ def _run_locked(container, ensure_lease):
         now = datetime.now(IST)
         day = now.date().isoformat()
         if progress.get('day') != day:
-            progress = {'day': day, 'used_seconds': 0, 'completed': {}}
+            backlog = progress.get('backlog', {brand: [] for brand in PROJECTS})
+            previous_day = progress.get('day')
+            if previous_day:
+                cursor = datetime.fromisoformat(previous_day).date()
+                while cursor < now.date():
+                    queued_day = cursor.isoformat()
+                    for brand in PROJECTS:
+                        completed = progress.get('completed', {}).get(brand) if queued_day == previous_day else None
+                        if completed != '18:45' and queued_day not in backlog.setdefault(brand, []):
+                            backlog[brand].append(queued_day)
+                    cursor += timedelta(days=1)
+            progress = {'day': day, 'used_seconds': 0, 'completed': {}, 'backlog': backlog}
+        progress.setdefault('backlog', {brand: [] for brand in PROJECTS})
+        container.upload_blob('progress.json', json.dumps(progress), overwrite=True)
         cutoffs = [value for value in ('10:30', '11:45', '15:00', '17:00', '18:45')
                    if value <= now.strftime('%H:%M')]
         cutoff = cutoffs[-1] if cutoffs else None
@@ -140,7 +153,8 @@ def _run_locked(container, ensure_lease):
                 if filename.endswith(".pdf"):
                     match = re.search(r'(20\d{2})-?(\d{2})-?(\d{2})', filename)
                     report_day = '-'.join(match.groups()) if match else None
-                    if report_day and report_day < day and (brand, filename) in acknowledged:
+                    if (report_day and report_day < day and (brand, filename) in acknowledged
+                            and report_day not in progress['backlog'].get(brand, [])):
                         continue
                     local = root / folder / "output/pdf" / filename
                     download(container, blob.name, local)
@@ -148,7 +162,10 @@ def _run_locked(container, ensure_lease):
         failures = []
         for brand, (folder, script) in PROJECTS.items():
             ensure_lease()
-            if not cutoff or progress['completed'].get(brand) == cutoff:
+            backlog = progress['backlog'].setdefault(brand, [])
+            job_day = min(backlog) if backlog else day
+            job_cutoff = '18:45' if backlog else cutoff
+            if not job_cutoff or (not backlog and progress['completed'].get(brand) == cutoff):
                 continue
             budget = int(os.environ.get('MAX_GENERATION_SECONDS_PER_DAY', '1800'))
             allowance = min(900, max(0, int(budget - progress['used_seconds'])))
@@ -168,14 +185,17 @@ def _run_locked(container, ensure_lease):
             env['PYTHONPATH'] = os.pathsep.join(sys.path)
             output = ''
             try:
-                result = subprocess.run([sys.executable, script], cwd=root / folder,
+                result = subprocess.run([sys.executable, script, '--as-of', f'{job_day}T{job_cutoff}:00'], cwd=root / folder,
                                         env=env, timeout=allowance, stdout=subprocess.PIPE,
                                         stderr=subprocess.STDOUT, text=True)
                 output = getattr(result, 'stdout', '') or ''
                 if result.returncode:
                     failures.append(brand)
                 else:
-                    progress['completed'][brand] = cutoff
+                    if backlog:
+                        backlog.remove(job_day)
+                    else:
+                        progress['completed'][brand] = cutoff
             except subprocess.TimeoutExpired as exc:
                 output = exc.stdout or ''
                 if isinstance(output, bytes):
@@ -212,6 +232,7 @@ def _run_locked(container, ensure_lease):
             summary = {"updated_at": datetime.now(IST).isoformat(),
                        "generation_failures": failures, "delivery_failures": send_failures,
                        "generation_seconds_today": progress['used_seconds'],
+                       "queued_days": progress['backlog'],
                        "receipts": dict(db.execute("SELECT brand,COUNT(*) FROM sent GROUP BY brand"))}
             container.upload_blob("status.json", json.dumps(summary), overwrite=True)
         LOG.info("Fleet cloud run complete: %s", summary)

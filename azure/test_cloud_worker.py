@@ -81,7 +81,7 @@ class CloudLifecycleTests(unittest.TestCase):
             self.env[brand.upper() + '_CONFIG_JSON'] = json.dumps({'client_id': 'fixture', 'client_secret': 'fixture'})
             self.env[brand.upper() + '_SITES_JSON'] = json.dumps({'sites': {'Test': {}}})
         fixed = datetime(2026, 10, 22, 12, 0, tzinfo=worker.IST)
-        clock = types.SimpleNamespace(now=lambda tz: fixed)
+        clock = types.SimpleNamespace(now=lambda tz: fixed, fromisoformat=datetime.fromisoformat)
         service = types.SimpleNamespace(get_container_client=lambda name: self.container)
         for context in (patch.dict(worker.os.environ, self.env), patch.object(worker, 'SOURCE', self.root),
                         patch.object(worker.time, 'tzset', create=True), patch.object(worker, 'datetime', clock),
@@ -137,6 +137,21 @@ class CloudLifecycleTests(unittest.TestCase):
             worker.run()
             generate.assert_not_called()
             send.assert_not_called()
+
+    def test_daily_limit_defers_incomplete_previous_day_without_repeating_completed_fleet(self):
+        self.container.files['progress.json'] = json.dumps({
+            'day': '2026-10-21', 'used_seconds': 1800,
+            'completed': {'scania': '18:45', 'volvo': '11:45'}}).encode()
+        with patch.object(worker.subprocess, 'run', side_effect=self.generate) as generate, patch('automation.telegram_reports.api', return_value={'message_id': 1}):
+            worker.run()
+            commands = [call.args[0] for call in generate.call_args_list]
+            self.assertEqual(commands[0][-1], '2026-10-22T11:45:00')
+            self.assertEqual(commands[1][-1], '2026-10-21T18:45:00')
+            progress = json.loads(self.container.files['progress.json'])
+            self.assertEqual(progress['backlog']['volvo'], [])
+            worker.run()
+            commands = [call.args[0] for call in generate.call_args_list]
+            self.assertEqual(commands[-1][-1], '2026-10-22T11:45:00')
 
 
 if __name__ == '__main__':

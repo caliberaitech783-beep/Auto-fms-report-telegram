@@ -60,12 +60,13 @@ def due_missing_reports(now: datetime, shifts: dict, sites: dict,
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument('--as-of', help='Evaluate due reports at this IST date/time for cloud catch-up.')
     parser.add_argument(
         "--lookback-days", type=int, default=DEFAULT_LOOKBACK_DAYS,
         help="Generate missing scheduled reports from this many previous days (default: 0/current date only).",
     )
     args = parser.parse_args(argv)
-    now = datetime.now()
+    now = datetime.fromisoformat(args.as_of).replace(tzinfo=None) if args.as_of else datetime.now()
     shifts = json.loads((BASE / "shifts.json").read_text(encoding="utf-8"))
     sites = json.loads((BASE / "site_config.json").read_text(encoding="utf-8"))
     generated = 0
