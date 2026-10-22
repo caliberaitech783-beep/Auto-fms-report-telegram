@@ -14,6 +14,7 @@ import subprocess
 import sys
 import urllib.error
 import urllib.request
+import urllib.parse
 import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,9 +58,12 @@ def api(token: str, method: str, fields: dict, pdf: Path | None = None) -> dict:
         parts.append(f'--{boundary}\r\nContent-Disposition: form-data; name="document"; filename="{filename}"\r\nContent-Type: application/pdf\r\n\r\n'.encode())
         parts.extend([pdf.read_bytes(), b"\r\n"])
     parts.append(f"--{boundary}--\r\n".encode())
+    body = b"".join(parts) if pdf else urllib.parse.urlencode(fields).encode()
+    content_type = (f"multipart/form-data; boundary={boundary}" if pdf
+                    else "application/x-www-form-urlencoded")
     request = urllib.request.Request(
-        f"https://api.telegram.org/bot{token}/{method}", data=b"".join(parts),
-        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+        f"https://api.telegram.org/bot{token}/{method}", data=body,
+        headers={"Content-Type": content_type},
     )
     # Never propagate urllib exceptions: their URLs contain the bot token.
     try:
@@ -106,8 +110,12 @@ def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT) -> int:
     start = cfg.get("start_date") or db.execute("SELECT value FROM settings WHERE key='start_date'").fetchone()[0]
     start_day = datetime.strptime(start, "%Y-%m-%d").date()
     for brand, (folder, _) in PROJECTS.items():
-        outbox = root / folder / "output" / "pdf"
+        project = Path(cfg.get("project_dirs", {}).get(brand, root / folder))
+        outbox = project / "output" / "pdf"
         for pdf in sorted(outbox.glob("*.pdf")):
+            age = datetime.now(IST).timestamp() - pdf.stat().st_mtime
+            if age < cfg.get("settle_seconds", 0):
+                continue
             if datetime.fromtimestamp(pdf.stat().st_mtime, IST).date() < start_day:
                 continue
             digest = hashlib.sha256(pdf.read_bytes()).hexdigest()
@@ -148,7 +156,8 @@ def main(argv=None) -> int:
         if not args.delivery_only:
             for brand, (folder, script) in PROJECTS.items():
                 try:
-                    result = subprocess.run([sys.executable, script], cwd=ROOT / folder, timeout=1800)
+                    project = Path(cfg.get("project_dirs", {}).get(brand, ROOT / folder))
+                    result = subprocess.run([sys.executable, script], cwd=project, timeout=1800)
                     failures += int(result.returncode != 0)
                 except (OSError, subprocess.TimeoutExpired):
                     LOG.error("%s generation failed; will retry on the next run", brand)

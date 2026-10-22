@@ -67,6 +67,22 @@ class DeliveryTests(unittest.TestCase):
         self.assertNotIn('SECRET', str(caught.exception))
         self.assertIn('429', str(caught.exception))
 
+    def test_existing_installation_outbox_and_settle_delay(self):
+        external = self.root / 'existing-installation'
+        outbox = external / 'output/pdf'
+        outbox.mkdir(parents=True)
+        (outbox / 'existing.pdf').write_bytes(b'%PDF-existing')
+        self.cfg['project_dirs'] = {'scania': str(external)}
+        self.cfg['settle_seconds'] = 30
+        with patch.object(reports, 'api') as send:
+            reports.deliver(self.cfg, self.db, self.root)
+            send.assert_not_called()
+        self.cfg['settle_seconds'] = 0
+        with patch.object(reports, 'api', return_value={'message_id': 1}) as send:
+            reports.deliver(self.cfg, self.db, self.root)
+            scania_files = [call.args[3].name for call in send.call_args_list if call.args[2]['caption'].startswith('Scania')]
+            self.assertEqual(scania_files, ['existing.pdf', 'existing.pdf'])
+
     def test_multipart_upload_and_response(self):
         response = io.BytesIO(json.dumps({'ok': True, 'result': {'message_id': 9}}).encode())
         pdf = self.root / reports.PROJECTS['scania'][0] / 'output/pdf/report.pdf'
@@ -76,6 +92,13 @@ class DeliveryTests(unittest.TestCase):
             self.assertIn(b'name="document"', body)
             self.assertIn(b'%PDF-test', body)
             self.assertIn(b'-1001', body)
+
+    def test_verification_uses_form_encoding(self):
+        response = io.BytesIO(b'{"ok":true,"result":{"id":1}}')
+        with patch.object(reports.urllib.request, 'urlopen', return_value=response) as request:
+            reports.api('secret', 'getChat', {'chat_id': '-1001'})
+            self.assertEqual(request.call_args.args[0].data, b'chat_id=-1001')
+            self.assertEqual(request.call_args.args[0].get_header('Content-type'), 'application/x-www-form-urlencoded')
 
 
 if __name__ == '__main__':

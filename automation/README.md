@@ -51,6 +51,13 @@ always-on Windows machine is required for unattended delivery through downtime.
 Existing generation tasks are not changed; avoid running duplicate generation
 tasks against the same directories when enabling this combined task.
 
+If report generation is already scheduled, use `-DeliveryOnly` when installing
+the task. It will only upload pending PDFs. Set local `project_dirs.scania` and
+`project_dirs.volvo` to the existing integration directories; each is expected
+to contain `output/pdf`. Set `settle_seconds` to 30 to allow new PDFs to finish
+writing before uploading them. Keep the existing fleet generation tasks enabled
+when using this mode.
+
 ## Delivery state and retries
 
 Successful uploads are recorded separately for each PDF content hash and chat in
