@@ -20,7 +20,11 @@ def build(destination):
     destination.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(destination, 'w', zipfile.ZIP_DEFLATED) as archive:
         for name, source in entries.items():
-            archive.writestr(name, source.read_bytes() if source else b'')
+            info = zipfile.ZipInfo(name)
+            info.create_system = 3
+            info.external_attr = 0o100644 << 16
+            info.compress_type = zipfile.ZIP_DEFLATED
+            archive.writestr(info, source.read_bytes() if source else b'')
     print(f'Built {destination.name}: {len(entries)} source files; no live configuration')
 
 
