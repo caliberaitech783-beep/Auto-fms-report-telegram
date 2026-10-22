@@ -1,0 +1,8 @@
+{
+  "bot_token": "YOUR_TELEGRAM_BOT_TOKEN",
+  "start_date": "",
+  "chats": {
+    "scania": ["YOUR_CHAT_ID"],
+    "volvo": ["YOUR_CHAT_ID"]
+  }
+}

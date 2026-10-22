@@ -30,8 +30,8 @@ Scania Data Access calls and creates A4 portrait shift PDFs.
 ## Configure
 
 1. Copy `scania_config.example.json` to `scania_config.json`.
-2. Paste the matching Scania **secret key** into `client_secret`. The supplied client
-   ID is already present in the example. Never commit `scania_config.json`.
+2. Set your Scania client ID and matching **secret key** in `client_id` and
+   `client_secret`. Never commit `scania_config.json`.
 3. Check `site_config.json`. Registration numbers were transcribed from the supplied
    Sasti and Dudhichua PDFs. VINs can be added if the API uses different registration spelling.
 4. Install dependencies:

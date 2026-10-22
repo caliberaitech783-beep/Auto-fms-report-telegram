@@ -16,3 +16,5 @@ tmp/
 pdf_verify/
 workbook_review/
 supporting_workbook_review/
+telegram_config.json
+automation/state/

@@ -2,6 +2,8 @@
 
 Source projects imported from the supplied Scania and Volvo integration archives.
 
+For scheduled delivery of both fleets' PDF reports, see [Telegram setup](automation/README.md).
+
 - [Scania API Integration](Scania%20API%20Integration/README.md)
 - [Volvo API Integration](Volvo%20API%20Integration/README.md)
 
