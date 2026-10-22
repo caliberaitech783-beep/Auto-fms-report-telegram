@@ -64,7 +64,9 @@ def prepare(root):
         if not cfg['routes'] or any(not str(chat).strip() for chat in cfg['routes'].values()):
             raise ValueError('Site destinations must be nonempty')
     if os.environ.get('REPORT_SCHEDULE_START'):
-        cfg['report_since'] = os.environ['REPORT_SCHEDULE_START']
+        start = datetime.fromisoformat(os.environ['REPORT_SCHEDULE_START'])
+        cfg['report_since'] = (start.astimezone(IST) if start.tzinfo
+                               else start.replace(tzinfo=IST)).isoformat()
     return cfg
 
 
@@ -128,7 +130,7 @@ def _run_locked(container, ensure_lease):
         progress = json.loads(progress_file.read_text()) if progress_file.exists() else {}
         now = datetime.now(IST)
         day = now.date().isoformat()
-        schedule_start = os.environ.get('REPORT_SCHEDULE_START')
+        schedule_start = cfg.get('report_since')
         if schedule_start and progress.get('schedule_start') != schedule_start:
             # New schedule starts prospectively. Keep today's charged runtime,
             # but never replay Testing history into production site groups.

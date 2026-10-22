@@ -31,6 +31,11 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(reports.recipients(cfg, 'volvo', 'Sasti_ShiftC_2026-10-22_2100_2300.pdf'), [])
         self.assertEqual(reports.recipients(cfg, 'scania', 'Sasti_Chandrapur_A1_20261022_1030.pdf'), [])
 
+    def test_utc_activation_is_compared_as_an_instant(self):
+        cfg = {'routes': {'Sasti':'group'}, 'report_since':'2026-10-22T10:39:58+00:00'}
+        self.assertEqual(reports.recipients(cfg, 'scania', 'Sasti_Chandrapur_B1_20261022_1600.pdf'), [])
+        self.assertEqual(reports.recipients(cfg, 'scania', 'Sasti_Chandrapur_B2_20261022_1800.pdf'), ['group'])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

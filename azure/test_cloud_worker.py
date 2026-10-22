@@ -131,6 +131,11 @@ class CloudLifecycleTests(unittest.TestCase):
             worker.run()
             service.assert_not_called()
 
+    def test_azure_utc_setting_is_normalized_to_ist_for_fleet_scripts(self):
+        with patch.dict(worker.os.environ, {'REPORT_SCHEDULE_START':'2026-10-22T10:39:58+00:00'}):
+            cfg = worker.prepare(self.root/'prepared')
+        self.assertEqual(cfg['report_since'], '2026-10-22T16:09:58+05:30')
+
     def test_schedule_cutover_keeps_daily_allowance_and_clears_testing_backlog(self):
         self.container.files['progress.json'] = json.dumps({
             'day':'2026-10-22', 'used_seconds':1800, 'completed':{'scania':'18:45'},

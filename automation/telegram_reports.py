@@ -67,7 +67,8 @@ def report_cutoff(brand: str, filename: str) -> datetime | None:
 def recipients(cfg: dict, brand: str, filename: str) -> list[str]:
     if cfg.get('report_since'):
         cutoff = report_cutoff(brand, filename)
-        since = datetime.fromisoformat(cfg['report_since']).replace(tzinfo=IST)
+        since = datetime.fromisoformat(cfg['report_since'])
+        since = since.astimezone(IST) if since.tzinfo else since.replace(tzinfo=IST)
         if cutoff is None or cutoff < since:
             return []
     if 'routes' in cfg:
