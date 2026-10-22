@@ -1,0 +1,156 @@
+"""Persist PDFs and per-chat receipts in this worker's private Blob container."""
+from datetime import datetime, timedelta, timezone
+from contextlib import closing
+import json
+import logging
+import os
+import hashlib
+import re
+import base64
+import zlib
+from pathlib import Path
+import shutil
+import sqlite3
+import subprocess
+import sys
+import tempfile
+import time
+
+from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError
+from azure.storage.blob import BlobServiceClient
+
+from automation.telegram_reports import PROJECTS, deliver
+
+LOG = logging.getLogger("fleet-cloud")
+IST = timezone(timedelta(hours=5, minutes=30))
+SOURCE = Path(__file__).resolve().parent
+
+
+def download(container, name, destination):
+    try:
+        data = container.download_blob(name).readall()
+    except ResourceNotFoundError:
+        return False
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(data)
+    return True
+
+
+def prepare(root):
+    """Each invocation gets writable, isolated project copies and local secrets."""
+    for brand, (folder, _) in PROJECTS.items():
+        destination = root / folder
+        shutil.copytree(SOURCE / folder, destination)
+        prefix = brand.upper()
+        credentials = json.loads(os.environ[f"{prefix}_CONFIG_JSON"])
+        if not credentials.get("client_id") or not credentials.get("client_secret"):
+            raise ValueError(f"Missing {brand} API credentials")
+        credentials.pop("site_config", None)
+        credentials.pop("shifts_config", None)
+        (destination / f"{brand}_config.json").write_text(json.dumps(credentials))
+        packed = os.environ.get(f"{prefix}_SITES_ZLIB_B64")
+        sites = json.loads(zlib.decompress(base64.b64decode(packed)) if packed
+                           else os.environ[f"{prefix}_SITES_JSON"])
+        if not sites.get("sites"):
+            raise ValueError(f"Missing {brand} site mappings")
+        (destination / "site_config.json").write_text(json.dumps(sites))
+    return {"bot_token": os.environ["TELEGRAM_BOT_TOKEN"],
+            "chats": {brand: [os.environ["TELEGRAM_CHAT_ID"]] for brand in PROJECTS},
+            "start_date": os.environ["REPORT_START_DATE"]}
+
+
+def run():
+    if os.environ.get("REPORTS_ENABLED", "false").lower() != "true":
+        LOG.warning("Cloud reporting is disabled pending cutover")
+        return
+    os.environ["TZ"] = "Asia/Kolkata"
+    time.tzset()
+    service = BlobServiceClient.from_connection_string(os.environ["AzureWebJobsStorage"])
+    container = service.get_container_client("fleet-report-state")
+    try:
+        container.create_container()
+    except ResourceExistsError:
+        pass
+    # Azure's monitored timer provides a distributed singleton lock and prevents
+    # overlapping invocations, including when the app scales to another host.
+    with tempfile.TemporaryDirectory(prefix="fleet-reports-") as work:
+        root = Path(work)
+        cfg = prepare(root)
+        progress_file = root / 'progress.json'
+        download(container, 'progress.json', progress_file)
+        progress = json.loads(progress_file.read_text()) if progress_file.exists() else {}
+        now = datetime.now(IST)
+        day = now.date().isoformat()
+        if progress.get('day') != day:
+            progress = {'day': day, 'used_seconds': 0, 'completed': {}}
+        cutoffs = [value for value in ('10:30', '11:45', '15:00', '17:00', '18:45')
+                   if value <= now.strftime('%H:%M')]
+        cutoff = cutoffs[-1] if cutoffs else None
+        database = root / "delivery.sqlite3"
+        download(container, "delivery.sqlite3", database)
+        acknowledged = set()
+        if database.exists():
+            with closing(sqlite3.connect(database)) as previous:
+                if previous.execute("SELECT name FROM sqlite_master WHERE name='sent'").fetchone():
+                    acknowledged = set(previous.execute(
+                        'SELECT brand,file FROM sent WHERE chat=?', (os.environ['TELEGRAM_CHAT_ID'],)))
+        existing_hashes = {}
+        for brand, (folder, _) in PROJECTS.items():
+            for blob in container.list_blobs(name_starts_with=f"pdf/{brand}/"):
+                filename = Path(blob.name).name
+                if filename.endswith(".pdf"):
+                    match = re.search(r'(20\d{2})-?(\d{2})-?(\d{2})', filename)
+                    report_day = '-'.join(match.groups()) if match else None
+                    if report_day and report_day < day and (brand, filename) in acknowledged:
+                        continue
+                    local = root / folder / "output/pdf" / filename
+                    download(container, blob.name, local)
+                    existing_hashes[blob.name] = hashlib.sha256(local.read_bytes()).hexdigest()
+        failures = []
+        for brand, (folder, script) in PROJECTS.items():
+            if not cutoff or progress['completed'].get(brand) == cutoff:
+                continue
+            budget = int(os.environ.get('MAX_GENERATION_SECONDS_PER_DAY', '1800'))
+            allowance = min(900, max(0, int(budget - progress['used_seconds'])))
+            if allowance < 30:
+                failures.append(brand + ': daily execution allowance exhausted')
+                continue
+            progress['used_seconds'] += allowance
+            container.upload_blob('progress.json', json.dumps(progress), overwrite=True)
+            started = time.monotonic()
+            # Prevent unrelated desktop env vars from redirecting configuration.
+            env = dict(os.environ)
+            env.pop("VOLVO_CONFIG_FILE", None)
+            env.pop("VOLVO_SITE_CONFIG_FILE", None)
+            env.pop("SCANIA_CONFIG_FILE", None)
+            try:
+                result = subprocess.run([sys.executable, script], cwd=root / folder,
+                                        env=env, timeout=allowance)
+                if result.returncode:
+                    failures.append(brand)
+                else:
+                    progress['completed'][brand] = cutoff
+            except (OSError, subprocess.TimeoutExpired):
+                failures.append(brand)
+            finally:
+                progress['used_seconds'] -= max(0, allowance - (time.monotonic() - started))
+                container.upload_blob('progress.json', json.dumps(progress), overwrite=True)
+            # Store every generated PDF before sending; retry after restarts.
+            for pdf in (root / folder / "output/pdf").glob("*.pdf"):
+                name = f"pdf/{brand}/{pdf.name}"
+                data = pdf.read_bytes()
+                if existing_hashes.get(name) != hashlib.sha256(data).hexdigest():
+                    container.upload_blob(name, data, overwrite=True)
+        with closing(sqlite3.connect(database)) as db:
+            def checkpoint():
+                container.upload_blob("delivery.sqlite3", database.read_bytes(), overwrite=True)
+            send_failures = deliver(cfg, db, root, checkpoint=checkpoint)
+            checkpoint()
+            summary = {"updated_at": datetime.now(IST).isoformat(),
+                       "generation_failures": failures, "delivery_failures": send_failures,
+                       "generation_seconds_today": progress['used_seconds'],
+                       "receipts": dict(db.execute("SELECT brand,COUNT(*) FROM sent GROUP BY brand"))}
+            container.upload_blob("status.json", json.dumps(summary), overwrite=True)
+        LOG.info("Fleet cloud run complete: %s", summary)
+        if failures or send_failures:
+            raise RuntimeError("Some fleet reports failed; pending work will retry next timer run")

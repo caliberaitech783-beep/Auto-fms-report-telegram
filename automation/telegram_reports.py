@@ -100,7 +100,7 @@ def exclusive_run(path: Path):
                 msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
 
 
-def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT) -> int:
+def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT, checkpoint=None) -> int:
     db.execute("CREATE TABLE IF NOT EXISTS sent (brand TEXT, file TEXT, digest TEXT, chat TEXT, message_id INTEGER, PRIMARY KEY (brand,file,digest,chat))")
     failures = 0
     db.execute("CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT)")
@@ -129,6 +129,8 @@ def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT) -> int:
                     }, pdf)
                     db.execute("INSERT INTO sent VALUES (?,?,?,?,?)", (*key, result["message_id"]))
                     db.commit()
+                    if checkpoint:
+                        checkpoint()
                     LOG.info("Delivered %s: %s", brand, pdf.name)
                 except TelegramError as exc:
                     failures += 1

@@ -4,7 +4,10 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import winsound
+try:
+    import winsound
+except ImportError:
+    winsound = None
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from time import sleep
@@ -88,14 +91,14 @@ def main(argv: list[str] | None = None) -> int:
                     len(pending), REPORT_RETRY_DELAY_SECONDS)
         sleep(REPORT_RETRY_DELAY_SECONDS)
     failures = len(pending)
-    if failures:
+    if failures and winsound is not None:
         # Four longer low tones mean at least one expected report failed.
         try:
             for _ in range(4):
                 winsound.Beep(450, 500)
         except RuntimeError:
             log.warning("Report generation failed, but the Windows beep device was unavailable.")
-    elif generated:
+    elif generated and winsound is not None:
         # Two short high tones mean all due reports were created successfully.
         try:
             winsound.Beep(1000, 250)
