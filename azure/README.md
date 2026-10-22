@@ -35,7 +35,8 @@ response can still cause a duplicate on retry.
   completion markers/backlog while preserving today's used generation allowance.
 - `REPORT_START_DATE`: earliest eligible PDF date, in `YYYY-MM-DD` format.
 - `REPORTS_ENABLED`: leave `false` until cutover is ready; set `true` to activate.
-- `MAX_GENERATION_SECONDS_PER_DAY`: default `1800` across both brands. A new
+- `MAX_GENERATION_SECONDS_PER_DAY`: live deployment `3600` (60 minutes) across
+  both brands; the conservative fallback remains `1800`. A new
   generation attempt reserves its timeout against this allowance before starting;
   unused time is returned after the process exits. A crashed attempt retains its
   reservation to prevent runaway retries. Each process is capped at 900 seconds.
@@ -44,9 +45,13 @@ response can still cause a duplicate on retry.
 
 The app uses no always-ready instances and creates no Application Insights resource.
 The daily generation allowance limits report API work, not total Azure billing.
-Storage, timer execution, data transfer and other charges still apply. An ₹800
-resource-group budget alert supports the user's ₹1,000 monthly target; budgets
-are alerts rather than hard caps. If the daily generation allowance is exhausted,
+Storage, timer execution, data transfer and other charges still apply. The live
+resource-group budget is ₹1,500/month with an actual-spend alert at ₹1,000
+(66.6667% of the budget); budgets are alerts rather than hard caps. The private
+PDF prefixes `fleet-report-state/pdf/scania/` and `fleet-report-state/pdf/volvo/`
+have an enabled storage lifecycle rule deleting blobs more than 10 days after
+their last modification. Delivery state and other prefixes are excluded.
+If the daily generation allowance is exhausted,
 remaining generation waits until the next date. Delivery retries continue.
 Incomplete dates are retained in a per-fleet backlog and generated oldest first
 when the next day's allowance is available. PDFs already generated for those dates
