@@ -123,18 +123,39 @@ def run():
             env.pop("VOLVO_CONFIG_FILE", None)
             env.pop("VOLVO_SITE_CONFIG_FILE", None)
             env.pop("SCANIA_CONFIG_FILE", None)
+            # Azure adds remote-built dependencies to the worker's sys.path;
+            # a child interpreter needs the same paths explicitly.
+            env['PYTHONPATH'] = os.pathsep.join(sys.path)
+            output = ''
             try:
                 result = subprocess.run([sys.executable, script], cwd=root / folder,
-                                        env=env, timeout=allowance)
+                                        env=env, timeout=allowance, stdout=subprocess.PIPE,
+                                        stderr=subprocess.STDOUT, text=True)
+                output = getattr(result, 'stdout', '') or ''
                 if result.returncode:
                     failures.append(brand)
                 else:
                     progress['completed'][brand] = cutoff
-            except (OSError, subprocess.TimeoutExpired):
+            except subprocess.TimeoutExpired as exc:
+                output = exc.stdout or ''
+                if isinstance(output, bytes):
+                    output = output.decode('utf-8', errors='replace')
+                output += '\nGeneration timed out; will retry within the daily allowance.'
+                failures.append(brand)
+            except OSError as exc:
+                output = str(exc)
                 failures.append(brand)
             finally:
                 progress['used_seconds'] -= max(0, allowance - (time.monotonic() - started))
                 container.upload_blob('progress.json', json.dumps(progress), overwrite=True)
+                for prefix in ('SCANIA', 'VOLVO'):
+                    secrets = json.loads(os.environ[prefix + '_CONFIG_JSON'])
+                    for key in ('client_id', 'client_secret'):
+                        value = secrets.get(key)
+                        if value:
+                            output = output.replace(value, '[redacted]')
+                output = output.replace(os.environ['TELEGRAM_BOT_TOKEN'], '[redacted]')
+                container.upload_blob(f'logs/{brand}-latest.txt', output[-64000:], overwrite=True)
             # Store every generated PDF before sending; retry after restarts.
             for pdf in (root / folder / "output/pdf").glob("*.pdf"):
                 name = f"pdf/{brand}/{pdf.name}"
