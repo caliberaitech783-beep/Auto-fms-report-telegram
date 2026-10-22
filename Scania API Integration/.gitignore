@@ -1,0 +1,7 @@
+scania_config.json
+output/
+logs/
+tmp/
+__pycache__/
+.pytest_cache/
+.venv/

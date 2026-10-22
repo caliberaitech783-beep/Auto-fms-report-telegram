@@ -1,0 +1,12 @@
+{
+  "enabled": false,
+  "graph_version": "YOUR_CURRENT_GRAPH_API_VERSION",
+  "phone_number_id": "YOUR_PHONE_NUMBER_ID",
+  "access_token": "YOUR_LONG_LIVED_ACCESS_TOKEN",
+  "template_name": "YOUR_APPROVED_DOCUMENT_TEMPLATE",
+  "template_language": "en",
+  "default_recipients": ["91XXXXXXXXXX"],
+  "recipients_by_site": {
+    "Sasti": ["91XXXXXXXXXX"]
+  }
+}

@@ -1,0 +1,11 @@
+volvo_config.json
+site_config.json
+.deps/
+__pycache__/
+*.pyc
+*.log
+fullday_result*.txt
+sasti_*.csv
+scores_*.json
+sample_snapshot.json
+

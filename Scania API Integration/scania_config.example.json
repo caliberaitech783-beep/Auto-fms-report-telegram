@@ -1,0 +1,8 @@
+{
+  "client_id": "YOUR_SCANIA_CLIENT_ID",
+  "client_secret": "",
+  "auth_base": "https://dataaccess.scania.com/auth",
+  "api_base": "https://dataaccess.scania.com/rfms4",
+  "site_config": "site_config.json",
+  "shifts_config": "shifts.json"
+}
