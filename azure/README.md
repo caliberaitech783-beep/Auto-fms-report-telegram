@@ -7,7 +7,9 @@ an explicit source allowlist. Live credentials are supplied through app settings
 never committed or included in the source ZIP.
 
 The monitored timer runs every five minutes. Python uses Asia/Kolkata for report
-dates. Due cutoffs are 10:30, 11:45, 15:00, 17:00 and 18:45 IST. Generated PDFs and
+dates. A renewable Blob lease also prevents manual runs from overlapping the
+timer; it expires automatically after a crashed worker stops renewing it.
+Due cutoffs are 10:30, 11:45, 15:00, 17:00 and 18:45 IST. Generated PDFs and
 delivery receipts survive host restarts in the private `fleet-report-state`
 container. Successful uploads checkpoint receipts immediately. A lost Telegram
 response can still cause a duplicate on retry.

@@ -17,9 +17,13 @@ class Missing(Exception):
 class Exists(Exception):
     pass
 
+class HttpError(Exception):
+    status_code = 409
+
 exceptions = types.ModuleType('azure.core.exceptions')
 exceptions.ResourceNotFoundError = Missing
 exceptions.ResourceExistsError = Exists
+exceptions.HttpResponseError = HttpError
 blob_sdk = types.ModuleType('azure.storage.blob')
 blob_sdk.BlobServiceClient = types.SimpleNamespace(from_connection_string=None)
 sys.modules.setdefault('azure.core.exceptions', exceptions)
@@ -32,6 +36,22 @@ spec.loader.exec_module(worker)
 class Container:
     def __init__(self):
         self.files = {}
+        self.locked = False
+    def get_blob_client(self, name):
+        container = self
+        class Lock:
+            def upload_blob(self, *args, **kwargs):
+                pass
+            def acquire_lease(self, **kwargs):
+                if container.locked:
+                    raise HttpError()
+                container.locked = True
+                return self
+            def renew(self):
+                pass
+            def release(self):
+                container.locked = False
+        return Lock()
     def create_container(self):
         pass
     def download_blob(self, name):
@@ -110,6 +130,13 @@ class CloudLifecycleTests(unittest.TestCase):
         with patch.dict(worker.os.environ, {'REPORTS_ENABLED': 'false'}), patch.object(worker.BlobServiceClient, 'from_connection_string') as service:
             worker.run()
             service.assert_not_called()
+
+    def test_overlapping_invocation_does_not_generate_or_send(self):
+        self.container.locked = True
+        with patch.object(worker.subprocess, 'run') as generate, patch('automation.telegram_reports.api') as send:
+            worker.run()
+            generate.assert_not_called()
+            send.assert_not_called()
 
 
 if __name__ == '__main__':

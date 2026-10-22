@@ -100,7 +100,7 @@ def exclusive_run(path: Path):
                 msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
 
 
-def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT, checkpoint=None) -> int:
+def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT, checkpoint=None, before_send=None) -> int:
     db.execute("CREATE TABLE IF NOT EXISTS sent (brand TEXT, file TEXT, digest TEXT, chat TEXT, message_id INTEGER, PRIMARY KEY (brand,file,digest,chat))")
     failures = 0
     db.execute("CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT)")
@@ -124,6 +124,8 @@ def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT, checkpoint=Non
                 if db.execute("SELECT 1 FROM sent WHERE brand=? AND file=? AND digest=? AND chat=?", key).fetchone():
                     continue
                 try:
+                    if before_send:
+                        before_send()
                     result = api(cfg["bot_token"], "sendDocument", {
                         "chat_id": chat, "caption": f"{brand.title()} report | {pdf.stem}"[:1024],
                     }, pdf)

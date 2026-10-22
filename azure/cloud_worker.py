@@ -15,8 +15,9 @@ import subprocess
 import sys
 import tempfile
 import time
+import threading
 
-from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError
+from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError, HttpResponseError
 from azure.storage.blob import BlobServiceClient
 
 from automation.telegram_reports import PROJECTS, deliver
@@ -63,16 +64,54 @@ def run():
     if os.environ.get("REPORTS_ENABLED", "false").lower() != "true":
         LOG.warning("Cloud reporting is disabled pending cutover")
         return
-    os.environ["TZ"] = "Asia/Kolkata"
-    time.tzset()
     service = BlobServiceClient.from_connection_string(os.environ["AzureWebJobsStorage"])
     container = service.get_container_client("fleet-report-state")
     try:
         container.create_container()
     except ResourceExistsError:
         pass
-    # Azure's monitored timer provides a distributed singleton lock and prevents
-    # overlapping invocations, including when the app scales to another host.
+    lock = container.get_blob_client('worker.lock')
+    try:
+        lock.upload_blob(b'', overwrite=False)
+    except ResourceExistsError:
+        pass
+    try:
+        lease = lock.acquire_lease(lease_duration=60)
+    except HttpResponseError as exc:
+        if exc.status_code == 409:
+            LOG.info('Another cloud report run holds the lease; skipping overlap')
+            return
+        raise
+    stop = threading.Event()
+    lost = threading.Event()
+    renewed_at = [time.monotonic()]
+    def renew():
+        while not stop.wait(20):
+            try:
+                lease.renew()
+                renewed_at[0] = time.monotonic()
+            except Exception:
+                lost.set()
+                return
+    def ensure_lease():
+        if lost.is_set() or time.monotonic() - renewed_at[0] > 45:
+            raise RuntimeError('Storage lease renewal failed; this invocation must stop')
+    thread = threading.Thread(target=renew, daemon=True)
+    thread.start()
+    try:
+        _run_locked(container, ensure_lease)
+    finally:
+        stop.set()
+        thread.join(timeout=2)
+        try:
+            lease.release()
+        except Exception:
+            LOG.warning('Could not release lease; it will expire automatically')
+
+
+def _run_locked(container, ensure_lease):
+    os.environ["TZ"] = "Asia/Kolkata"
+    time.tzset()
     with tempfile.TemporaryDirectory(prefix="fleet-reports-") as work:
         root = Path(work)
         cfg = prepare(root)
@@ -108,6 +147,7 @@ def run():
                     existing_hashes[blob.name] = hashlib.sha256(local.read_bytes()).hexdigest()
         failures = []
         for brand, (folder, script) in PROJECTS.items():
+            ensure_lease()
             if not cutoff or progress['completed'].get(brand) == cutoff:
                 continue
             budget = int(os.environ.get('MAX_GENERATION_SECONDS_PER_DAY', '1800'))
@@ -146,6 +186,7 @@ def run():
                 output = str(exc)
                 failures.append(brand)
             finally:
+                ensure_lease()
                 progress['used_seconds'] -= max(0, allowance - (time.monotonic() - started))
                 container.upload_blob('progress.json', json.dumps(progress), overwrite=True)
                 for prefix in ('SCANIA', 'VOLVO'):
@@ -164,8 +205,9 @@ def run():
                     container.upload_blob(name, data, overwrite=True)
         with closing(sqlite3.connect(database)) as db:
             def checkpoint():
+                ensure_lease()
                 container.upload_blob("delivery.sqlite3", database.read_bytes(), overwrite=True)
-            send_failures = deliver(cfg, db, root, checkpoint=checkpoint)
+            send_failures = deliver(cfg, db, root, checkpoint=checkpoint, before_send=ensure_lease)
             checkpoint()
             summary = {"updated_at": datetime.now(IST).isoformat(),
                        "generation_failures": failures, "delivery_failures": send_failures,
