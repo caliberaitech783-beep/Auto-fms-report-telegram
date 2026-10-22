@@ -11,6 +11,26 @@ import telegram_reports as reports
 
 
 class DeliveryTests(unittest.TestCase):
+    def test_site_routes_never_fall_back_to_testing(self):
+        cfg = {'routes': {'Dhoptala':'dh', 'Majri':'ma', 'Sasti':'sa', 'Gouri':'go',
+                          'Dudhichua':'dc', 'Jayant':'ja'},
+               'chats': {'scania':['testing'], 'volvo':['testing']}}
+        for name, chat in [('Dhoptala','dh'),('Majri','ma'),('Sasti_Chandrapur','sa'),
+                           ('Gouri','go'),('Dudhichua_East','dc'),('Dudhichua_West','dc'),
+                           ('Dudhichua_Singrauli','dc'),('Jayant_East','ja'),('Jayant_West','ja')]:
+            for brand in reports.PROJECTS:
+                self.assertEqual(reports.recipients(cfg, brand, name+'.pdf'), [chat])
+        self.assertEqual(reports.recipients(cfg, 'volvo', 'Unknown_sites.pdf'), [])
+
+    def test_production_cutover_uses_cutoff_date_not_shift_start_date(self):
+        cfg = {'routes': {'Sasti':'group'}, 'report_since':'2026-10-23T00:00:00+05:30'}
+        for brand, name in [('scania','Sasti_Chandrapur_C3_20261022_0300.pdf'),
+                            ('volvo','Sasti_ShiftC_2026-10-22_2100_0300.pdf')]:
+            self.assertEqual(reports.recipients(cfg, brand, name), ['group'])
+            self.assertEqual(reports.report_cutoff(brand, name).isoformat(), '2026-10-23T03:00:00+05:30')
+        self.assertEqual(reports.recipients(cfg, 'volvo', 'Sasti_ShiftC_2026-10-22_2100_2300.pdf'), [])
+        self.assertEqual(reports.recipients(cfg, 'scania', 'Sasti_Chandrapur_A1_20261022_1030.pdf'), [])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

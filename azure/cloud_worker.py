@@ -20,11 +20,12 @@ import threading
 from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError, HttpResponseError
 from azure.storage.blob import BlobServiceClient
 
-from automation.telegram_reports import PROJECTS, deliver
+from automation.telegram_reports import PROJECTS, deliver, report_cutoff
 
 LOG = logging.getLogger("fleet-cloud")
 IST = timezone(timedelta(hours=5, minutes=30))
 SOURCE = Path(__file__).resolve().parent
+CUTOFFS = ('03:00', '09:00', '11:30', '16:00', '18:00', '23:00')
 
 
 def download(container, name, destination):
@@ -55,9 +56,16 @@ def prepare(root):
         if not sites.get("sites"):
             raise ValueError(f"Missing {brand} site mappings")
         (destination / "site_config.json").write_text(json.dumps(sites))
-    return {"bot_token": os.environ["TELEGRAM_BOT_TOKEN"],
+    cfg = {"bot_token": os.environ["TELEGRAM_BOT_TOKEN"],
             "chats": {brand: [os.environ["TELEGRAM_CHAT_ID"]] for brand in PROJECTS},
             "start_date": os.environ["REPORT_START_DATE"]}
+    if os.environ.get('TELEGRAM_ROUTES_JSON'):
+        cfg['routes'] = json.loads(os.environ['TELEGRAM_ROUTES_JSON'])
+        if not cfg['routes'] or any(not str(chat).strip() for chat in cfg['routes'].values()):
+            raise ValueError('Site destinations must be nonempty')
+    if os.environ.get('REPORT_SCHEDULE_START'):
+        cfg['report_since'] = os.environ['REPORT_SCHEDULE_START']
+    return cfg
 
 
 def run():
@@ -120,6 +128,14 @@ def _run_locked(container, ensure_lease):
         progress = json.loads(progress_file.read_text()) if progress_file.exists() else {}
         now = datetime.now(IST)
         day = now.date().isoformat()
+        schedule_start = os.environ.get('REPORT_SCHEDULE_START')
+        if schedule_start and progress.get('schedule_start') != schedule_start:
+            # New schedule starts prospectively. Keep today's charged runtime,
+            # but never replay Testing history into production site groups.
+            progress = {'day': day, 'used_seconds': progress.get('used_seconds', 0)
+                        if progress.get('day') == day else 0,
+                        'completed': {}, 'backlog': {brand: [] for brand in PROJECTS},
+                        'schedule_start': schedule_start}
         if progress.get('day') != day:
             backlog = progress.get('backlog', {brand: [] for brand in PROJECTS})
             previous_day = progress.get('day')
@@ -129,13 +145,14 @@ def _run_locked(container, ensure_lease):
                     queued_day = cursor.isoformat()
                     for brand in PROJECTS:
                         completed = progress.get('completed', {}).get(brand) if queued_day == previous_day else None
-                        if completed != '18:45' and queued_day not in backlog.setdefault(brand, []):
+                        if completed != CUTOFFS[-1] and queued_day not in backlog.setdefault(brand, []):
                             backlog[brand].append(queued_day)
                     cursor += timedelta(days=1)
-            progress = {'day': day, 'used_seconds': 0, 'completed': {}, 'backlog': backlog}
+            progress = {'day': day, 'used_seconds': 0, 'completed': {}, 'backlog': backlog,
+                        'schedule_start': schedule_start}
         progress.setdefault('backlog', {brand: [] for brand in PROJECTS})
         container.upload_blob('progress.json', json.dumps(progress), overwrite=True)
-        cutoffs = [value for value in ('10:30', '11:45', '15:00', '17:00', '18:45')
+        cutoffs = [value for value in CUTOFFS
                    if value <= now.strftime('%H:%M')]
         cutoff = cutoffs[-1] if cutoffs else None
         database = root / "delivery.sqlite3"
@@ -144,15 +161,17 @@ def _run_locked(container, ensure_lease):
         if database.exists():
             with closing(sqlite3.connect(database)) as previous:
                 if previous.execute("SELECT name FROM sqlite_master WHERE name='sent'").fetchone():
-                    acknowledged = set(previous.execute(
-                        'SELECT brand,file FROM sent WHERE chat=?', (os.environ['TELEGRAM_CHAT_ID'],)))
+                    acknowledged = set(previous.execute('SELECT brand,file FROM sent'))
         existing_hashes = {}
         for brand, (folder, _) in PROJECTS.items():
             for blob in container.list_blobs(name_starts_with=f"pdf/{brand}/"):
                 filename = Path(blob.name).name
                 if filename.endswith(".pdf"):
+                    end = report_cutoff(brand, filename)
+                    if schedule_start and (end is None or end < datetime.fromisoformat(schedule_start)):
+                        continue
                     match = re.search(r'(20\d{2})-?(\d{2})-?(\d{2})', filename)
-                    report_day = '-'.join(match.groups()) if match else None
+                    report_day = end.date().isoformat() if end else ('-'.join(match.groups()) if match else None)
                     if (report_day and report_day < day and (brand, filename) in acknowledged
                             and report_day not in progress['backlog'].get(brand, [])):
                         continue
@@ -164,7 +183,7 @@ def _run_locked(container, ensure_lease):
             ensure_lease()
             backlog = progress['backlog'].setdefault(brand, [])
             job_day = min(backlog) if backlog else day
-            job_cutoff = '18:45' if backlog else cutoff
+            job_cutoff = CUTOFFS[-1] if backlog else cutoff
             if not job_cutoff or (not backlog and progress['completed'].get(brand) == cutoff):
                 continue
             budget = int(os.environ.get('MAX_GENERATION_SECONDS_PER_DAY', '1800'))
@@ -185,7 +204,10 @@ def _run_locked(container, ensure_lease):
             env['PYTHONPATH'] = os.pathsep.join(sys.path)
             output = ''
             try:
-                result = subprocess.run([sys.executable, script, '--as-of', f'{job_day}T{job_cutoff}:00'], cwd=root / folder,
+                command = [sys.executable, script, '--as-of', f'{job_day}T{job_cutoff}:00']
+                if schedule_start:
+                    command += ['--since', schedule_start]
+                result = subprocess.run(command, cwd=root / folder,
                                         env=env, timeout=allowance, stdout=subprocess.PIPE,
                                         stderr=subprocess.STDOUT, text=True)
                 output = getattr(result, 'stdout', '') or ''
@@ -233,6 +255,8 @@ def _run_locked(container, ensure_lease):
                        "generation_failures": failures, "delivery_failures": send_failures,
                        "generation_seconds_today": progress['used_seconds'],
                        "queued_days": progress['backlog'],
+                       "schedule_cutoffs_ist": CUTOFFS, "schedule_start": schedule_start,
+                       "site_routes": cfg.get('routes', {}),
                        "receipts": dict(db.execute("SELECT brand,COUNT(*) FROM sent GROUP BY brand"))}
             container.upload_blob("status.json", json.dumps(summary), overwrite=True)
         LOG.info("Fleet cloud run complete: %s", summary)

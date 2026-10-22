@@ -1,5 +1,5 @@
 {
-  "_note": "Shift windows per site. C crosses midnight (start > end). Times are local (IST). 04:00-start sites: Jayant East/West, Jayant 2, Majri. 05:00-start: Dhoptala, Dudhichua East/West, Gouri, Sasti.",
+  "_note": "IST shifts. Jayant East/West/2: 04:00-12:00, 12:00-20:00, 20:00-04:00. Other sites: 05:00-13:00, 13:00-21:00, 21:00-05:00. End minute is inclusive; partial reports stop exactly at their cutoff.",
   "sites": {
     "Jayant East": {
       "A": [
@@ -101,16 +101,16 @@
     },
     "Majri": {
       "A": [
-        "04:00",
-        "11:59"
+        "05:00",
+        "12:59"
       ],
       "B": [
-        "12:00",
-        "19:59"
+        "13:00",
+        "20:59"
       ],
       "C": [
-        "20:00",
-        "03:59"
+        "21:00",
+        "04:59"
       ]
     },
     "Sasti": {

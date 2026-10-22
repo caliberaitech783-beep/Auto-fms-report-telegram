@@ -36,10 +36,30 @@ def api_row(distance):
 
 
 class RecoveryPlanningTests(unittest.TestCase):
+    def test_production_sites_use_previous_evening_for_three_am(self):
+        import json
+        from api_report_runner import SHIFTS_FILE
+        shifts = json.loads(SHIFTS_FILE.read_text())
+        with tempfile.TemporaryDirectory() as directory:
+            jobs = plan_missing_reports(when('2026-10-23T03:00:00'),
+                       ['Sasti','Majri','Jayant East','Jayant West'], shifts, Path(directory))
+        self.assertEqual(len(jobs), 4)
+        for job in jobs:
+            self.assertEqual(job['shift'], 'C')
+            self.assertEqual(job['start'].date().isoformat(), '2026-10-22')
+            self.assertEqual(job['start'].hour, 20 if 'Jayant' in job['site'] else 21)
+            self.assertEqual(job['cutoff'], when('2026-10-23T03:00:00'))
+
+    def test_cutover_excludes_earlier_reports(self):
+        with tempfile.TemporaryDirectory() as directory:
+            jobs = plan_missing_reports(when('2026-10-23T23:00:00'), ['Test Site'], SITES,
+                       Path(directory), since=when('2026-10-23T18:01:00'))
+        self.assertEqual([job['cutoff'].hour for job in jobs], [23])
+
     def test_same_date_missed_reports_are_selected(self):
         cutoffs = scheduled_cutoffs(when("2026-08-06T16:00:00"))
         self.assertEqual([c.strftime("%H:%M") for c in cutoffs],
-                         ["10:30", "11:45", "15:00"])
+                         ["03:00", "09:00", "11:30", "16:00"])
 
     def test_previous_dates_are_excluded(self):
         cutoffs = scheduled_cutoffs(when("2026-08-06T16:00:00"))
@@ -50,15 +70,15 @@ class RecoveryPlanningTests(unittest.TestCase):
     def test_future_report_times_are_excluded(self):
         cutoffs = scheduled_cutoffs(when("2026-08-06T16:00:00"))
         values = {c.strftime("%H:%M") for c in cutoffs}
-        self.assertNotIn("17:00", values)
-        self.assertNotIn("18:45", values)
+        self.assertNotIn("18:00", values)
+        self.assertNotIn("23:00", values)
 
     def test_existing_output_is_not_planned_again(self):
-        now = when("2026-08-06T10:30:00")
+        now = when("2026-08-06T03:00:00")
         with tempfile.TemporaryDirectory() as temp_dir:
             outbox = Path(temp_dir)
-            start = when("2026-08-06T04:00:00")
-            existing = outbox / report_filename("Test Site", "A", start, now)
+            start = when("2026-08-05T20:00:00")
+            existing = outbox / report_filename("Test Site", "C", start, now)
             existing.touch()
             jobs = plan_missing_reports(now, ["Test Site"], SITES, outbox)
         self.assertEqual(jobs, [])

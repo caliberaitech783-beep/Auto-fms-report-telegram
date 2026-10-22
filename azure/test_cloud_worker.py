@@ -131,6 +131,35 @@ class CloudLifecycleTests(unittest.TestCase):
             worker.run()
             service.assert_not_called()
 
+    def test_schedule_cutover_keeps_daily_allowance_and_clears_testing_backlog(self):
+        self.container.files['progress.json'] = json.dumps({
+            'day':'2026-10-22', 'used_seconds':1800, 'completed':{'scania':'18:45'},
+            'backlog':{'scania':['2026-10-21'], 'volvo':['2026-10-21']}}).encode()
+        with patch.dict(worker.os.environ, {'REPORT_SCHEDULE_START':'2026-10-22T12:01:00+05:30'}), \
+             patch.object(worker.subprocess, 'run') as generate:
+            with self.assertRaises(RuntimeError):
+                worker.run()
+            generate.assert_not_called()
+        progress = json.loads(self.container.files['progress.json'])
+        self.assertEqual(progress['used_seconds'], 1800)
+        self.assertEqual(progress['completed'], {})
+        self.assertEqual(progress['backlog'], {'scania':[], 'volvo':[]})
+
+    def test_three_am_pdf_is_restored_by_cutoff_day_despite_previous_shift_date(self):
+        fixed = datetime(2026,10,23,9,tzinfo=worker.IST)
+        clock = types.SimpleNamespace(now=lambda tz:fixed, fromisoformat=datetime.fromisoformat)
+        filename = 'Sasti_ShiftC_2026-10-22_2100_0300.pdf'
+        self.container.files['pdf/volvo/'+filename] = b'%PDF-night'
+        restored = []
+        def generate(args, cwd, **kwargs):
+            if 'Volvo' in str(cwd):
+                restored.append((cwd/'output/pdf'/filename).exists())
+            return types.SimpleNamespace(returncode=0)
+        with patch.object(worker,'datetime',clock), patch.object(worker.subprocess,'run',side_effect=generate), \
+             patch('automation.telegram_reports.api',return_value={'message_id':1}):
+            worker.run()
+        self.assertEqual(restored,[True])
+
     def test_overlapping_invocation_does_not_generate_or_send(self):
         self.container.locked = True
         with patch.object(worker.subprocess, 'run') as generate, patch('automation.telegram_reports.api') as send:
@@ -141,17 +170,17 @@ class CloudLifecycleTests(unittest.TestCase):
     def test_daily_limit_defers_incomplete_previous_day_without_repeating_completed_fleet(self):
         self.container.files['progress.json'] = json.dumps({
             'day': '2026-10-21', 'used_seconds': 1800,
-            'completed': {'scania': '18:45', 'volvo': '11:45'}}).encode()
+            'completed': {'scania': '23:00', 'volvo': '11:30'}}).encode()
         with patch.object(worker.subprocess, 'run', side_effect=self.generate) as generate, patch('automation.telegram_reports.api', return_value={'message_id': 1}):
             worker.run()
             commands = [call.args[0] for call in generate.call_args_list]
-            self.assertEqual(commands[0][-1], '2026-10-22T11:45:00')
-            self.assertEqual(commands[1][-1], '2026-10-21T18:45:00')
+            self.assertEqual(commands[0][-1], '2026-10-22T11:30:00')
+            self.assertEqual(commands[1][-1], '2026-10-21T23:00:00')
             progress = json.loads(self.container.files['progress.json'])
             self.assertEqual(progress['backlog']['volvo'], [])
             worker.run()
             commands = [call.args[0] for call in generate.call_args_list]
-            self.assertEqual(commands[-1][-1], '2026-10-22T11:45:00')
+            self.assertEqual(commands[-1][-1], '2026-10-22T11:30:00')
 
 
 if __name__ == '__main__':

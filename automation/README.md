@@ -3,7 +3,12 @@
 `telegram_reports.py` runs Scania's scheduled runner and Volvo's recovery runner,
 then uploads their PDFs through Telegram's `sendDocument` API. Run this wrapper
 to get Telegram delivery; the original standalone runners still generate PDFs only.
-The report cutoffs remain 10:30, 11:45, 15:00, 17:00 and 18:45 IST.
+The active cloud report cutoffs are 03:00, 09:00, 11:30, 16:00, 18:00 and 23:00
+IST. Reports cover the current shift's start through the cutoff; 03:00 covers
+the previous evening's C-shift start through the next day's 03:00.
+Optional `routes` map filename substrings to site group IDs and replace brand
+destinations. Unmatched reports are held. Optional `report_since` is an IST ISO
+cutoff timestamp that prevents historical files from reaching new destinations.
 
 ## Local setup
 

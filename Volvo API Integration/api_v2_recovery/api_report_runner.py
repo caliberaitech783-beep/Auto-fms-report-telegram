@@ -24,7 +24,7 @@ OUTBOX = BASE / "output" / "pdf"
 LOG_DIR = BASE / "logs"
 SHIFTS_FILE = BASE / "shifts.json"
 QUEUE_FILE = OUTBOX / "whatsapp_queue.jsonl"
-SCHEDULED_REPORT_TIMES = ("10:30", "11:45", "15:00", "17:00", "18:45")
+SCHEDULED_REPORT_TIMES = ("03:00", "09:00", "11:30", "16:00", "18:00", "23:00")
 
 LOG_DIR.mkdir(exist_ok=True)
 logging.basicConfig(
@@ -86,10 +86,12 @@ def scheduled_cutoffs(now: datetime,
 
 
 def plan_missing_reports(now: datetime, sites: list[str], shifts: dict,
-                         outbox: Path = OUTBOX) -> list[dict]:
+                         outbox: Path = OUTBOX, since: datetime | None = None) -> list[dict]:
     """Plan today's due site reports, excluding exact outputs already present."""
     jobs = []
     for cutoff in scheduled_cutoffs(now):
+        if since and cutoff < since:
+            continue
         for site in sites:
             window = _active_window(site, cutoff, shifts)
             if not window:
@@ -110,7 +112,7 @@ def _write_queue(entry: dict):
         handle.write(json.dumps(entry, ensure_ascii=True) + "\n")
 
 
-def main(as_of: str | None = None) -> int | None:
+def main(as_of: str | None = None, since: str | None = None) -> int | None:
     # Convert the machine-local wall clock through the integration's parser so
     # all report boundaries are timezone-aware IST values.
     now = (volvo.parse_when(as_of) if as_of else
@@ -122,7 +124,8 @@ def main(as_of: str | None = None) -> int | None:
         log.error("Asset-group synchronization failed; using last valid mapping: %s", exc)
         site_cfg = volvo.load_site_config()
     sites = list((site_cfg.get("sites") or {}).keys())
-    jobs = plan_missing_reports(now, sites, shifts, OUTBOX)
+    jobs = plan_missing_reports(now, sites, shifts, OUTBOX,
+                                since=volvo.parse_when(since) if since else None)
     if not jobs:
         log.info("No scheduled report due or all due outputs already exist at %s", now)
         return None  # No work due: successful exit, no sound.
@@ -192,6 +195,7 @@ def main(as_of: str | None = None) -> int | None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate browser-free Volvo API PDFs.")
     parser.add_argument("--as-of", help="Backfill cutoff in site-local IST, e.g. 2026-07-24T11:45:00")
+    parser.add_argument("--since", help="Exclude cutoffs before this IST activation timestamp.")
     parser.add_argument("--test-sound", choices=("success", "failure"),
                         help="Play a signal only; do not call APIs or generate reports")
     args = parser.parse_args()
@@ -200,7 +204,7 @@ if __name__ == "__main__":
         raise SystemExit(0)
 
     try:
-        result = main(args.as_of)
+        result = main(args.as_of, args.since)
     except (Exception, KeyboardInterrupt):
         log.exception("Scheduled report run failed")
         _play_signal("failure")

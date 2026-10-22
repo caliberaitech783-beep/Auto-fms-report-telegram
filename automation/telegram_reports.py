@@ -8,6 +8,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 from pathlib import Path
 import sqlite3
 import subprocess
@@ -35,7 +36,7 @@ def load_config(path: Path) -> dict:
     cfg["bot_token"] = os.environ.get("TELEGRAM_BOT_TOKEN") or cfg.get("bot_token", "")
     if not cfg["bot_token"] or "YOUR_" in cfg["bot_token"]:
         raise ValueError("Set TELEGRAM_BOT_TOKEN or bot_token in the local configuration")
-    for brand in PROJECTS:
+    for brand in (() if cfg.get('routes') else PROJECTS):
         recipients = cfg.get("chats", {}).get(brand)
         if not isinstance(recipients, list) or not recipients:
             raise ValueError(f"Configure at least one chats.{brand} destination")
@@ -44,6 +45,40 @@ def load_config(path: Path) -> dict:
     if cfg.get("start_date"):
         datetime.strptime(cfg["start_date"], "%Y-%m-%d")
     return cfg
+
+
+def report_cutoff(brand: str, filename: str) -> datetime | None:
+    """Recover the actual cutoff date, including overnight shift filenames."""
+    if brand == 'scania':
+        match = re.search(r'_([ABC])\d*_(\d{8})_(\d{4})\.pdf$', filename)
+        if not match:
+            return None
+        shift, day, stop = match.groups()
+        value = datetime.strptime(day + stop, '%Y%m%d%H%M').replace(tzinfo=IST)
+        return value + timedelta(days=1) if shift == 'C' and stop < '1200' else value
+    match = re.search(r'_Shift[ABC]_(\d{4}-\d{2}-\d{2})_(\d{4})_(\d{4})\.pdf$', filename)
+    if not match:
+        return None
+    day, start, stop = match.groups()
+    value = datetime.strptime(day + stop, '%Y-%m-%d%H%M').replace(tzinfo=IST)
+    return value + timedelta(days=1) if stop < start else value
+
+
+def recipients(cfg: dict, brand: str, filename: str) -> list[str]:
+    if cfg.get('report_since'):
+        cutoff = report_cutoff(brand, filename)
+        since = datetime.fromisoformat(cfg['report_since']).replace(tzinfo=IST)
+        if cutoff is None or cutoff < since:
+            return []
+    if 'routes' in cfg:
+        matches = [str(chat) for site, chat in cfg['routes'].items()
+                   if site.casefold() in filename.casefold()]
+        if not matches:
+            LOG.warning('No site destination configured; holding %s: %s', brand, filename)
+        if len(set(matches)) > 1:
+            raise ValueError(f'Ambiguous site destinations for {filename}')
+        return list(dict.fromkeys(matches))
+    return list(dict.fromkeys(str(chat) for chat in cfg['chats'][brand]))
 
 
 def api(token: str, method: str, fields: dict, pdf: Path | None = None) -> dict:
@@ -119,7 +154,7 @@ def deliver(cfg: dict, db: sqlite3.Connection, root: Path = ROOT, checkpoint=Non
             if datetime.fromtimestamp(pdf.stat().st_mtime, IST).date() < start_day:
                 continue
             digest = hashlib.sha256(pdf.read_bytes()).hexdigest()
-            for chat in dict.fromkeys(str(c) for c in cfg["chats"][brand]):
+            for chat in recipients(cfg, brand, pdf.name):
                 key = (brand, pdf.name, digest, chat)
                 if db.execute("SELECT 1 FROM sent WHERE brand=? AND file=? AND digest=? AND chat=?", key).fetchone():
                     continue
@@ -149,7 +184,9 @@ def main(argv=None) -> int:
     cfg = load_config(args.config)
     if args.check:
         api(cfg["bot_token"], "getMe", {})
-        for chat in {str(c) for chats in cfg["chats"].values() for c in chats}:
+        chats = (cfg['routes'].values() if cfg.get('routes') else
+                 [c for chats in cfg['chats'].values() for c in chats])
+        for chat in {str(c) for c in chats}:
             api(cfg["bot_token"], "getChat", {"chat_id": chat})
         LOG.info("Bot and destination chats verified; no reports sent")
         return 0

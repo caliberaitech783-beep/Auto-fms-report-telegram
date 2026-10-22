@@ -22,7 +22,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(), logging.FileHandler(LOGS / "scheduled.log", encoding="utf-8")],
 )
 log = logging.getLogger("scania-scheduled")
-SCHEDULED_REPORTS = ("A1", "A2", "B1", "B2", "B3")
+SCHEDULED_REPORTS = ("A1", "A2", "B1", "B2", "C1", "C3")
 DEFAULT_LOOKBACK_DAYS = 0
 REPORT_ATTEMPTS = 2
 REPORT_RETRY_DELAY_SECONDS = 30
@@ -42,7 +42,7 @@ def expected_path(site: str, report: str, report_day: date, stop_s: str) -> Path
 
 
 def due_missing_reports(now: datetime, shifts: dict, sites: dict,
-                        lookback_days: int = DEFAULT_LOOKBACK_DAYS):
+                        lookback_days: int = DEFAULT_LOOKBACK_DAYS, since: datetime | None = None):
     first_day = now.date() - timedelta(days=max(0, lookback_days))
     for day_offset in range((now.date() - first_day).days + 1):
         report_day = first_day + timedelta(days=day_offset)
@@ -52,15 +52,21 @@ def due_missing_reports(now: datetime, shifts: dict, sites: dict,
             for report in SCHEDULED_REPORTS:
                 if report not in site_shifts["reports"]:
                     continue
-                _, stop_s = site_shifts["reports"][report]
-                path = expected_path(site, report, report_day, stop_s)
+                start_s, stop_s = site_shifts["reports"][report]
+                # Calendar-day scheduling: 03:00 belongs to yesterday's C shift.
+                shift_day = report_day - timedelta(days=1) if stop_s < start_s else report_day
+                scheduled = datetime.combine(report_day, time.fromisoformat(stop_s))
+                if since and scheduled < since:
+                    continue
+                path = expected_path(site, report, shift_day, stop_s)
                 if report_due(report_day, stop_s, now) and not path.exists():
-                    yield site, report, report_day
+                    yield site, report, shift_day
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--as-of', help='Evaluate due reports at this IST date/time for cloud catch-up.')
+    parser.add_argument('--since', help='Exclude cutoffs before this IST activation timestamp.')
     parser.add_argument(
         "--lookback-days", type=int, default=DEFAULT_LOOKBACK_DAYS,
         help="Generate missing scheduled reports from this many previous days (default: 0/current date only).",
@@ -71,7 +77,8 @@ def main(argv: list[str] | None = None) -> int:
     sites = json.loads((BASE / "site_config.json").read_text(encoding="utf-8"))
     generated = 0
     pending = list(due_missing_reports(
-        now, shifts, sites, lookback_days=args.lookback_days
+        now, shifts, sites, lookback_days=args.lookback_days,
+        since=datetime.fromisoformat(args.since).replace(tzinfo=None) if args.since else None,
     ))
     for attempt in range(1, REPORT_ATTEMPTS + 1):
         failed = []

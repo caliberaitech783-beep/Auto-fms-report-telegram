@@ -9,7 +9,11 @@ never committed or included in the source ZIP.
 The monitored timer runs every five minutes. Python uses Asia/Kolkata for report
 dates. A renewable Blob lease also prevents manual runs from overlapping the
 timer; it expires automatically after a crashed worker stops renewing it.
-Due cutoffs are 10:30, 11:45, 15:00, 17:00 and 18:45 IST. Generated PDFs and
+Due cutoffs are 03:00, 09:00, 11:30, 16:00, 18:00 and 23:00 IST. Every report
+covers its current shift's start through that cutoff. The 03:00 partial report
+starts on the previous date at 21:00 (20:00 for Jayant). It is not a full C-shift
+report; no extra 04:00/05:00 final report is scheduled. Majri uses 05:00/13:00/21:00
+shift starts, matching the supplied shift table. Generated PDFs and
 delivery receipts survive host restarts in the private `fleet-report-state`
 container. Successful uploads checkpoint receipts immediately. A lost Telegram
 response can still cause a duplicate on retry.
@@ -19,7 +23,16 @@ response can still cause a duplicate on retry.
 - `SCANIA_CONFIG_JSON`, `VOLVO_CONFIG_JSON`: credential configuration objects.
 - `SCANIA_SITES_ZLIB_B64`, `VOLVO_SITES_ZLIB_B64`: zlib-compressed, base64-encoded
   UTF-8 site configuration JSON. Plain `*_SITES_JSON` is also supported.
-- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`: sender credentials and destination.
+- `TELEGRAM_BOT_TOKEN`: sender credentials.
+- `TELEGRAM_ROUTES_JSON`: object mapping filename substrings to destination chat
+  IDs: Dhoptala, Majri, Sasti, Gouri, Dudhichua, Jayant. Both brands use the same
+  routes; all Dudhichua variants go to DCH FMS and all Jayant variants to Jayant FMS.
+  Unmapped reports stay in private storage; they are never sent to a fallback group.
+  `TELEGRAM_CHAT_ID` supports legacy single-group mode when routes are absent.
+- `REPORT_SCHEDULE_START`: IST ISO activation timestamp. Earlier cutoffs are
+  excluded from generation and delivery, preventing Testing history from being
+  replayed into site groups. Changing this setting clears the old schedule's
+  completion markers/backlog while preserving today's used generation allowance.
 - `REPORT_START_DATE`: earliest eligible PDF date, in `YYYY-MM-DD` format.
 - `REPORTS_ENABLED`: leave `false` until cutover is ready; set `true` to activate.
 - `MAX_GENERATION_SECONDS_PER_DAY`: default `1800` across both brands. A new
