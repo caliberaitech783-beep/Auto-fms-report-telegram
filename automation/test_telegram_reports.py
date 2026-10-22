@@ -100,6 +100,14 @@ class DeliveryTests(unittest.TestCase):
             self.assertEqual(request.call_args.args[0].data, b'chat_id=-1001')
             self.assertEqual(request.call_args.args[0].get_header('Content-type'), 'application/x-www-form-urlencoded')
 
+    def test_lost_cloud_lease_prevents_upload(self):
+        def lost_lease():
+            raise RuntimeError('lease lost')
+        with patch.object(reports, 'api') as send:
+            with self.assertRaisesRegex(RuntimeError, 'lease lost'):
+                reports.deliver(self.cfg, self.db, self.root, before_send=lost_lease)
+            send.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()
