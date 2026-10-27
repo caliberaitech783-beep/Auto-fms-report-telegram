@@ -131,6 +131,23 @@ class CloudLifecycleTests(unittest.TestCase):
             worker.run()
             service.assert_not_called()
 
+    def test_empty_report_markers_survive_worker_restart(self):
+        filename = 'Sasti_ShiftC_2026-10-21_2100_0300.pdf.empty.json'
+        def generate(args, cwd, **kwargs):
+            result = self.generate(args,cwd,**kwargs)
+            (cwd/'output/pdf'/filename).write_text('{"reason":"no qualifying vehicles"}')
+            return result
+        with patch.object(worker.subprocess,'run',side_effect=generate), patch('automation.telegram_reports.api',return_value={'message_id':1}):
+            worker.run()
+        self.assertIn('pdf/volvo/'+filename,self.container.files)
+        def inspect(cfg,db,root,**kwargs):
+            for folder,_ in worker.PROJECTS.values():
+                self.assertTrue((root/folder/'output/pdf'/filename).exists())
+            return 0
+        with patch.object(worker,'deliver',side_effect=inspect), patch.object(worker.subprocess,'run') as generate:
+            worker.run()
+            generate.assert_not_called()
+
     def test_azure_utc_setting_is_normalized_to_ist_for_fleet_scripts(self):
         with patch.dict(worker.os.environ, {'REPORT_SCHEDULE_START':'2026-10-22T10:39:58+00:00'}):
             cfg = worker.prepare(self.root/'prepared')

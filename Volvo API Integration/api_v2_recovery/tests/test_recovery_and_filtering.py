@@ -36,6 +36,34 @@ def api_row(distance):
 
 
 class RecoveryPlanningTests(unittest.TestCase):
+    def test_cloud_unknown_sites_do_not_reopen_previous_night(self):
+        import os, json
+        from unittest.mock import patch
+        from api_report_runner import configured_sites, SHIFTS_FILE
+        shifts = json.loads(SHIFTS_FILE.read_text())
+        with patch.dict(os.environ, {'TELEGRAM_ROUTES_JSON':json.dumps({'Sasti':'group','Jayant':'group'})}):
+            sites = configured_sites({'sites':{'Sasti':{},'Jayant East':{},'Unknown sites':{}}})
+        self.assertEqual(sites,['Sasti','Jayant East'])
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            previous = plan_missing_reports(when('2026-10-27T09:00:00'),sites,shifts,out)
+            for job in previous:
+                job['expected'].touch()
+            jobs = plan_missing_reports(when('2026-10-27T11:30:00'),sites,shifts,out)
+        self.assertEqual(len(jobs),2)
+        self.assertEqual(min(job['start'].date().isoformat() for job in jobs),'2026-10-27')
+
+    def test_empty_report_marker_prevents_repeated_old_window(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            previous = plan_missing_reports(when('2026-10-27T09:00:00'),['Test Site'],SITES,out)
+            for job in previous:
+                Path(str(job['expected'])+'.empty.json').write_text('{"reason":"no qualifying vehicles"}')
+            jobs = plan_missing_reports(when('2026-10-27T11:30:00'),['Test Site'],SITES,out)
+        self.assertEqual(len(jobs),1)
+        self.assertEqual(jobs[0]['cutoff'],when('2026-10-27T11:30:00'))
+        self.assertEqual(jobs[0]['start'],when('2026-10-27T04:00:00'))
+
     def test_production_sites_use_previous_evening_for_three_am(self):
         import json
         from api_report_runner import SHIFTS_FILE

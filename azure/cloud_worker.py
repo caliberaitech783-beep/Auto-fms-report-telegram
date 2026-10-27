@@ -168,8 +168,8 @@ def _run_locked(container, ensure_lease):
         for brand, (folder, _) in PROJECTS.items():
             for blob in container.list_blobs(name_starts_with=f"pdf/{brand}/"):
                 filename = Path(blob.name).name
-                if filename.endswith(".pdf"):
-                    end = report_cutoff(brand, filename)
+                if filename.endswith((".pdf", ".pdf.empty.json")):
+                    end = report_cutoff(brand, filename.removesuffix('.empty.json'))
                     if schedule_start and (end is None or end < datetime.fromisoformat(schedule_start)):
                         continue
                     match = re.search(r'(20\d{2})-?(\d{2})-?(\d{2})', filename)
@@ -242,7 +242,9 @@ def _run_locked(container, ensure_lease):
                 output = output.replace(os.environ['TELEGRAM_BOT_TOKEN'], '[redacted]')
                 container.upload_blob(f'logs/{brand}-latest.txt', output[-64000:], overwrite=True)
             # Store every generated PDF before sending; retry after restarts.
-            for pdf in (root / folder / "output/pdf").glob("*.pdf"):
+            for pdf in (root / folder / "output/pdf").iterdir() if (root / folder / "output/pdf").exists() else ():
+                if not pdf.name.endswith(('.pdf', '.pdf.empty.json')):
+                    continue
                 name = f"pdf/{brand}/{pdf.name}"
                 data = pdf.read_bytes()
                 if existing_hashes.get(name) != hashlib.sha256(data).hexdigest():

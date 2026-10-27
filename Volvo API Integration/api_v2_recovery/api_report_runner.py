@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import logging
 import argparse
+import os
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -98,7 +99,7 @@ def plan_missing_reports(now: datetime, sites: list[str], shifts: dict,
                 continue
             shift, start = window
             expected = outbox / report_filename(site, shift, start, cutoff)
-            if expected.exists():
+            if expected.exists() or Path(str(expected) + '.empty.json').exists():
                 log.info("Already generated; skipping %s", expected.name)
                 continue
             jobs.append({"site": site, "shift": shift, "start": start,
@@ -112,6 +113,14 @@ def _write_queue(entry: dict):
         handle.write(json.dumps(entry, ensure_ascii=True) + "\n")
 
 
+def configured_sites(site_cfg: dict) -> list[str]:
+    sites = list((site_cfg.get('sites') or {}).keys())
+    if os.environ.get('TELEGRAM_ROUTES_JSON'):
+        routes = json.loads(os.environ['TELEGRAM_ROUTES_JSON'])
+        sites = [site for site in sites if any(key.casefold() in site.casefold() for key in routes)]
+    return sites
+
+
 def main(as_of: str | None = None, since: str | None = None) -> int | None:
     # Convert the machine-local wall clock through the integration's parser so
     # all report boundaries are timezone-aware IST values.
@@ -123,7 +132,9 @@ def main(as_of: str | None = None, since: str | None = None) -> int | None:
     except Exception as exc:
         log.error("Asset-group synchronization failed; using last valid mapping: %s", exc)
         site_cfg = volvo.load_site_config()
-    sites = list((site_cfg.get("sites") or {}).keys())
+    # Cloud destinations are explicit. Unmapped/Unknown sites must not keep
+    # reopening old windows and exhaust the budget for real site reports.
+    sites = configured_sites(site_cfg)
     jobs = plan_missing_reports(now, sites, shifts, OUTBOX,
                                 since=volvo.parse_when(since) if since else None)
     if not jobs:
@@ -172,6 +183,10 @@ def main(as_of: str | None = None, since: str | None = None) -> int | None:
         try:
             result = build_pdf(rows, site, shift, start, cutoff, OUTBOX)
             if not result:
+                expected.parent.mkdir(parents=True, exist_ok=True)
+                Path(str(expected) + '.empty.json').write_text(json.dumps({
+                    'site': site, 'shift': shift, 'start': start.isoformat(),
+                    'cutoff': cutoff.isoformat(), 'reason': 'no qualifying vehicles'}))
                 log.info("%s Shift %s at %s: no vehicles met the 30-minute and "
                          "15-km minimums; skipped", site, shift, cutoff)
                 continue
