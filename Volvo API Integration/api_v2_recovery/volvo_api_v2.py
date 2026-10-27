@@ -287,47 +287,39 @@ def meta_for_vin(vin: str, site: str, site_config: dict,
     return {"registration": None, "driver": "Unknown"}
 
 
-def fetch_vehicle_display_names(auth: dict) -> dict[str, str]:
-    """Current Volvo Connect customer display names keyed by VIN."""
-    url = BASE_URL + VEHICLES_PATH
+def fetch_vehicle_inventory(auth: dict) -> list[dict]:
+    """Complete live fleet inventory. Never accept a truncated vehicle list."""
     headers = {**auth, "Accept": VEHICLES_ACCEPT}
-    names: dict[str, str] = {}
-    last_vin: str | None = None
-
+    inventory = {}
+    last_vin = None
     for page_no in range(1, 100):
-        params = {"lastVin": last_vin} if last_vin else {}
-        try:
-            resp = _api_get(url, headers=headers, params=params)
-            if resp.status_code == 401:
-                print("[vehicles] 401 Unauthorized; using local site_config names")
-                return {}
-            resp.raise_for_status()
-        except requests.RequestException as exc:
-            print(f"[vehicles] metadata request failed ({exc}); "
-                  "using local site_config names")
-            return {}
-
+        resp = _api_get(BASE_URL + VEHICLES_PATH, headers=headers,
+                        params={"lastVin": last_vin} if last_vin else {})
+        resp.raise_for_status()
         data = resp.json()
-        body = data.get("vehicleResponse", data) if isinstance(data, dict) else {}
-        vehicles = (body.get("vehicles") or []) if isinstance(body, dict) else []
+        body = data.get("vehicleResponse", data)
+        vehicles = body.get("vehicles") or []
         for item in vehicles:
-            if not isinstance(item, dict) or not item.get("vin"):
-                continue
-            display_name = str(item.get("customerVehicleName") or "").strip()
-            if display_name:
-                names[item["vin"]] = display_name
-
-        if not data.get("moreDataAvailable") or not vehicles:
-            break
-        next_vin = vehicles[-1].get("vin")
+            if isinstance(item, dict) and item.get("vin"):
+                inventory[item["vin"]] = item
+        if not data.get("moreDataAvailable"):
+            print(f"[vehicles] loaded {len(inventory)} vehicles over {page_no} pages")
+            return list(inventory.values())
+        next_vin = vehicles[-1].get("vin") if vehicles else None
         if not next_vin or next_vin == last_vin:
-            print("[vehicles] pagination stopped because lastVin did not advance")
-            break
+            raise RuntimeError("Volvo vehicle pagination did not advance")
         last_vin = next_vin
+    raise RuntimeError("Volvo vehicle inventory exceeded page limit")
 
-    print(f"[vehicles] loaded {len(names)} current Volvo Connect display names "
-          f"over {page_no} page(s)")
-    return names
+
+def fetch_vehicle_display_names(auth: dict) -> dict[str, str]:
+    """Current customer names; legacy callers retain their fallback behavior."""
+    try:
+        return {v["vin"]: str(v["customerVehicleName"]).strip()
+                for v in fetch_vehicle_inventory(auth) if v.get("customerVehicleName")}
+    except (requests.RequestException, RuntimeError) as exc:
+        print(f"[vehicles] metadata unavailable ({type(exc).__name__}); using saved names")
+        return {}
 
 
 def fetch_driver_directory(auth: dict) -> dict[str, str]:
@@ -464,7 +456,7 @@ def _extract_statuses(page) -> tuple[list[dict], bool]:
     return statuses, more
 
 
-def fetch_statuses(start: str, stop: str, auth: dict) -> list[dict]:
+def fetch_statuses(start: str, stop: str, auth: dict, on_page=None) -> list[dict]:
     """
     GET /vehiclestatuses?starttime=..&stoptime.. -> flat list of status dicts
     across ALL pages.
@@ -498,6 +490,10 @@ def fetch_statuses(start: str, stop: str, auth: dict) -> list[dict]:
 
         statuses, more = _extract_statuses(resp.json())
         if not statuses:
+            if more:
+                raise RuntimeError("Volvo pagination returned an empty incomplete page")
+            if on_page:
+                on_page([], stop, True)
             break
 
         latest_received = None
@@ -514,13 +510,15 @@ def fetch_statuses(start: str, stop: str, auth: dict) -> list[dict]:
             print(f"[statuses] page {pages}, {len(out)} records so far, "
                   f"cursor at {cursor}")
 
+        if more and (not latest_received or latest_received <= cursor):
+            raise RuntimeError("Volvo status pagination did not advance; refusing incomplete data")
+        if on_page:
+            on_page(statuses, latest_received if more else stop, not more)
         if not more:
             break
-        if not latest_received or latest_received <= cursor:
-            break  # no forward progress -> stop rather than loop
         cursor = latest_received
     else:
-        print(f"[statuses] WARNING: hit the {MAX_PAGES}-page safety cap "
+        raise RuntimeError(f"[statuses] hit the {MAX_PAGES}-page safety cap "
               f"before the fleet cursor reached '{stop}' (stopped at "
               f"'{cursor}'). Later hours of the window are likely MISSING "
               f"for every vehicle -> undercounted totals. Raise MAX_PAGES "

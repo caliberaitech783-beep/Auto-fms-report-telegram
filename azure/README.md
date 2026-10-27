@@ -39,7 +39,29 @@ response can still cause a duplicate on retry.
   both brands; the conservative fallback remains `1800`. A new
   generation attempt reserves its timeout against this allowance before starting;
   unused time is returned after the process exits. A crashed attempt retains its
-  reservation to prevent runaway retries. Each process is capped at 900 seconds.
+  reservation to prevent runaway retries. With incremental collection enabled,
+  each attempt is capped at 90 seconds for collection, 180 seconds for Scania,
+  and 300 seconds for Volvo. Retries for a scheduled batch are bounded at
+  240 seconds for Scania and 480 seconds for Volvo. Every later cutoff retains
+  240 seconds of shared generation runtime. Background collection has a further
+  1,800-second/day ceiling and cannot consume those reserves.
+- `VOLVO_INCREMENTAL_CACHE=true`: collect fleet history every half hour and five
+  minutes before each report cutoff. The next report fetches only new records
+  with a ten-minute overlap for late arrivals. Every downloaded page commits its
+  records and received-time cursor. A timeout resumes from that cursor on the
+  next attempt; incomplete history is never treated as a complete report.
+  A consistent compressed SQLite snapshot survives restarts at
+  `cache/volvo/fleet.sqlite3.gz`. Snapshot history is trimmed to three days;
+  it contains operational data and must stay private. It is independent of the
+  PDF lifecycle policy. Inventory refreshes hourly; driver names every six hours.
+- `VOLVO_AUTO_SITE_PREFIX=true`: discover new API-visible VINs and add a vehicle
+  whose Volvo Connect customer name begins with one exact configured report site
+  followed by a separator, e.g. `Sasti V850`, `Jayant East V851`, or
+  `Dudhichua West V852`. Existing mapped VINs retain their site. API activation
+  alone does not provide group membership: the live Vehicle API exposes no
+  Volvo Connect group field. Unprefixed or ambiguous new VINs remain unassigned
+  in the private cache; their count is visible in `status.json`. The API account
+  must also be authorized to see each new VIN. No portal passwords are needed.
 - `AzureWebJobsStorage`: this app's own host and report storage connection string,
   provisioned by Azure CLI during app creation.
 
@@ -53,9 +75,17 @@ have an enabled storage lifecycle rule deleting blobs more than 10 days after
 their last modification. Delivery state and other prefixes are excluded.
 If the daily generation allowance is exhausted,
 remaining generation waits until the next date. Delivery retries continue.
-Incomplete dates are retained in a per-fleet backlog and generated oldest first
-when the next day's allowance is available. PDFs already generated for those dates
+Incomplete dates are retained in a per-fleet backlog. With incremental collection,
+current reports take priority and older dates use spare runtime. History older
+than the three-day cache needs an explicit API backfill. PDFs already generated for those dates
 are restored to avoid recreating and resending them during catch-up.
+
+Each completed brand is delivered immediately, with a durable receipt after each
+Telegram acknowledgement. A delayed batch posts one notice to its affected site
+groups after ten minutes. State preserves the 60-minute generation limit;
+deployment never resets a spent allowance. API outages, source-data latency,
+Telegram outages, or an exhausted allowance can still delay delivery. The
+five-minute timer begins work at each listed cutoff, with PDFs following processing.
 
 ## Build and verification
 

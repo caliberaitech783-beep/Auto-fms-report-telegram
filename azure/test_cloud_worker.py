@@ -189,6 +189,81 @@ class CloudLifecycleTests(unittest.TestCase):
             generate.assert_not_called()
             send.assert_not_called()
 
+    def test_later_cutoffs_keep_runtime_even_after_early_failures(self):
+        with patch.dict(worker.os.environ, {'VOLVO_INCREMENTAL_CACHE':'true', 'MAX_GENERATION_SECONDS_PER_DAY':'3600'}):
+            early = datetime(2026,10,27,9,tzinfo=worker.IST)
+            progress = {'used_seconds': 2640}
+            # Four future cutoffs retain 4 * 240 seconds.
+            self.assertEqual(worker.generation_allowance(progress, 'volvo', early), 0)
+            later = early.replace(hour=18)
+            self.assertEqual(worker.generation_allowance(progress, 'volvo', later), 300)
+            progress['used_seconds'] = 3600
+            self.assertEqual(worker.generation_allowance(progress, 'volvo', later), 0)
+
+    def test_background_collection_cannot_consume_report_reserves(self):
+        with patch.dict(worker.os.environ, {'VOLVO_INCREMENTAL_CACHE':'true', 'MAX_GENERATION_SECONDS_PER_DAY':'3600'}):
+            now = datetime(2026,10,27,0,tzinfo=worker.IST)
+            self.assertEqual(worker.generation_allowance({'used_seconds':0}, 'volvo', now, True), 90)
+            self.assertEqual(worker.generation_allowance({'used_seconds':0,'collection_seconds':1800}, 'volvo', now, True), 0)
+            self.assertEqual(worker.generation_allowance({'used_seconds':2000}, 'volvo', now, True), 0)
+
+    def test_incremental_failure_does_not_reopen_exhausted_slot(self):
+        self.container.files['progress.json'] = json.dumps({'day':'2026-10-22', 'used_seconds':600,
+            'completed':{'scania':'11:30'},'slot_seconds':{'volvo:2026-10-22:11:30':480}}).encode()
+        with patch.dict(worker.os.environ, {'VOLVO_INCREMENTAL_CACHE':'true', 'MAX_GENERATION_SECONDS_PER_DAY':'3600'}), \
+             patch.object(worker.subprocess,'run') as generate, patch('cloud_worker.api', return_value={'message_id':2}):
+            with self.assertRaises(RuntimeError):
+                worker.run()
+            generate.assert_not_called()
+        self.assertEqual(json.loads(self.container.files['progress.json'])['used_seconds'],600)
+
+    def test_cache_survives_a_timed_out_generation_and_restart(self):
+        import gzip
+        def generate(args, cwd, **kwargs):
+            if 'Volvo' not in str(cwd):
+                return self.generate(args,cwd,**kwargs)
+            state = cwd/'state/fleet.sqlite3'
+            state.parent.mkdir()
+            with sqlite3.connect(state) as db:
+                db.execute('CREATE TABLE metadata (key TEXT PRIMARY KEY,value TEXT)')
+                db.execute('INSERT INTO metadata VALUES (?,?)', ('pending',json.dumps({'cursor':'saved-page'})))
+                db.commit()
+            db.close()
+            raise worker.subprocess.TimeoutExpired(args,30)
+        with patch.dict(worker.os.environ, {'VOLVO_INCREMENTAL_CACHE':'true','MAX_GENERATION_SECONDS_PER_DAY':'3600'}), \
+             patch.object(worker.subprocess,'run',side_effect=generate), \
+             patch('automation.telegram_reports.api',return_value={'message_id':1}):
+            with self.assertRaises(RuntimeError):
+                worker.run()
+        archive = self.container.files['cache/volvo/fleet.sqlite3.gz']
+        restored = self.root/'restored.sqlite3'
+        restored.write_bytes(gzip.decompress(archive))
+        with sqlite3.connect(restored) as db:
+            self.assertEqual(json.loads(db.execute('SELECT value FROM metadata').fetchone()[0])['cursor'],'saved-page')
+        db.close()
+
+    def test_delay_notice_is_sent_once_to_affected_groups(self):
+        cfg = {'bot_token':'fake','routes':{'Sasti':'s','Dudhichua':'d','Majri':'m'}}
+        progress = {'day':'2026-10-22','completed':{'scania':'11:30'}}
+        now = datetime(2026,10,22,11,45,tzinfo=worker.IST)
+        with patch.object(worker,'api',return_value={'message_id':1}) as send:
+            worker.notify_delays(cfg,progress,now,['volvo'],lambda:None,self.container)
+            self.assertEqual(send.call_count,3)
+            worker.notify_delays(cfg,progress,now,['volvo'],lambda:None,self.container)
+            self.assertEqual(send.call_count,3)
+
+    def test_scania_delivery_happens_before_volvo_generation(self):
+        order = []
+        def generate(args,cwd,**kwargs):
+            order.append('scania_generate' if 'Scania' in str(cwd) else 'volvo_generate')
+            return self.generate(args,cwd,**kwargs)
+        def send(*args,**kwargs):
+            order.append('send')
+            return {'message_id':1}
+        with patch.object(worker.subprocess,'run',side_effect=generate), patch('automation.telegram_reports.api',side_effect=send):
+            worker.run()
+        self.assertLess(order.index('send'),order.index('volvo_generate'))
+
     def test_daily_limit_defers_incomplete_previous_day_without_repeating_completed_fleet(self):
         self.container.files['progress.json'] = json.dumps({
             'day': '2026-10-21', 'used_seconds': 1800,

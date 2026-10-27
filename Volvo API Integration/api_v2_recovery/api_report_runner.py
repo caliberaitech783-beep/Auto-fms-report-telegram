@@ -16,6 +16,7 @@ except ImportError:  # pragma: no cover - this automation runs on Windows
 
 import volvo_api_v2 as volvo
 from asset_group_sync import sync_asset_groups
+from fleet_cache import FleetCache, CollectionPending
 from api_pdf_report import build_pdf, report_filename
 from whatsapp_sender import load_config, send_pdf
 
@@ -121,7 +122,7 @@ def configured_sites(site_cfg: dict) -> list[str]:
     return sites
 
 
-def main(as_of: str | None = None, since: str | None = None) -> int | None:
+def main(as_of: str | None = None, since: str | None = None, collect_only: bool = False) -> int | None:
     # Convert the machine-local wall clock through the integration's parser so
     # all report boundaries are timezone-aware IST values.
     now = (volvo.parse_when(as_of) if as_of else
@@ -137,20 +138,55 @@ def main(as_of: str | None = None, since: str | None = None) -> int | None:
     sites = configured_sites(site_cfg)
     jobs = plan_missing_reports(now, sites, shifts, OUTBOX,
                                 since=volvo.parse_when(since) if since else None)
-    if not jobs:
+    incremental = os.environ.get("VOLVO_INCREMENTAL_CACHE", "false").lower() == "true"
+    if not jobs and not (incremental and collect_only):
         log.info("No scheduled report due or all due outputs already exist at %s", now)
         return None  # No work due: successful exit, no sound.
 
-    earliest = min(job["start"] for job in jobs)
-    latest = max(job["cutoff"] for job in jobs)
-    client_id, secret = volvo.load_credentials()
-    auth = volvo.auth_header(client_id, secret)
-    display_names = volvo.fetch_vehicle_display_names(auth)
-    driver_directory = volvo.fetch_driver_directory(auth)
+    if collect_only:
+        jobs = []
+    earliest = min((job["start"] for job in jobs), default=now.replace(hour=0, minute=0) - timedelta(hours=6))
+    latest = max((job["cutoff"] for job in jobs), default=now)
+    auth = volvo.auth_header(*volvo.load_credentials())
     fetch_start = earliest - timedelta(minutes=volvo.PRE_WINDOW_MIN)
-    log.info("Recovering %d missing report(s); fetching fleet once for %s through %s",
-             len(jobs), fetch_start, latest)
-    snapshots = volvo.fetch_statuses(volvo._utc_z(fetch_start), volvo._utc_z(latest), auth)
+    if incremental:
+        cache = FleetCache(BASE / "state/fleet.sqlite3")
+        try:
+            if collect_only and cache.get('coverage'):
+                fetch_start = volvo.parse_when(cache.get('coverage')['start'])
+            site_cfg = cache.get('site_config', site_cfg)
+            # Metadata discovery is independent of status pagination. Preserve the
+            # last valid names/mappings if Volvo's inventory endpoint is down.
+            try:
+                site_cfg, display_names, driver_directory = cache.metadata(auth, site_cfg, sites, now,
+                                                                         force_inventory=not collect_only)
+                cache.put('metadata_error', None)
+            except Exception as exc:
+                cache.put('metadata_error', type(exc).__name__)
+                display_names = {v['vin']: v.get('customerVehicleName', '') for v in cache.get('inventory', [])}
+                driver_directory = cache.get('drivers', {})
+                log.warning('Vehicle inventory refresh failed; retaining saved mapping: %s', type(exc).__name__)
+            try:
+                cache.collect(fetch_start, latest, auth,
+                              seconds=float(os.environ.get('VOLVO_COLLECTION_SLICE_SECONDS', '75')))
+            except CollectionPending:
+                log.info('Incremental collection checkpoint saved; next timer resumes it')
+                return 75
+            cache.put('last_collected', latest.isoformat())
+            cache.put('health', {'coverage': cache.get('coverage'),
+                                'pending_vehicles': len(cache.get('unassigned_vehicles', [])),
+                                'metadata_error': cache.get('metadata_error')})
+            if collect_only:
+                return None
+            snapshots = cache.snapshots(fetch_start, latest)
+        finally:
+            cache.close()
+    else:
+        display_names = volvo.fetch_vehicle_display_names(auth)
+        driver_directory = volvo.fetch_driver_directory(auth)
+        log.info("Recovering %d missing report(s); fetching fleet once for %s through %s",
+                 len(jobs), fetch_start, latest)
+        snapshots = volvo.fetch_statuses(volvo._utc_z(fetch_start), volvo._utc_z(latest), auth)
     by_vin = volvo.group_by_vin(snapshots)
 
     wa_cfg = load_config(BASE)
@@ -210,6 +246,7 @@ def main(as_of: str | None = None, since: str | None = None) -> int | None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate browser-free Volvo API PDFs.")
     parser.add_argument("--as-of", help="Backfill cutoff in site-local IST, e.g. 2026-07-24T11:45:00")
+    parser.add_argument("--collect-only", action="store_true", help="Save new fleet data without generating PDFs")
     parser.add_argument("--since", help="Exclude cutoffs before this IST activation timestamp.")
     parser.add_argument("--test-sound", choices=("success", "failure"),
                         help="Play a signal only; do not call APIs or generate reports")
@@ -219,7 +256,7 @@ if __name__ == "__main__":
         raise SystemExit(0)
 
     try:
-        result = main(args.as_of, args.since)
+        result = main(args.as_of, args.since, args.collect_only)
     except (Exception, KeyboardInterrupt):
         log.exception("Scheduled report run failed")
         _play_signal("failure")
@@ -227,5 +264,6 @@ if __name__ == "__main__":
 
     if result is None:
         raise SystemExit(0)
-    _play_signal("success" if result == 0 else "failure")
+    if result != 75:
+        _play_signal("success" if result == 0 else "failure")
     raise SystemExit(result)
