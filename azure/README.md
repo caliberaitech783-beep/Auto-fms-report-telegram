@@ -35,7 +35,7 @@ response can still cause a duplicate on retry.
   completion markers/backlog while preserving today's used generation allowance.
 - `REPORT_START_DATE`: earliest eligible PDF date, in `YYYY-MM-DD` format.
 - `REPORTS_ENABLED`: leave `false` until cutover is ready; set `true` to activate.
-- `MAX_GENERATION_SECONDS_PER_DAY`: live deployment `3600` (60 minutes) across
+- `MAX_GENERATION_SECONDS_PER_DAY`: live deployment `21600` (360 minutes) across
   both brands; the conservative fallback remains `1800`. A new
   generation attempt reserves its timeout against this allowance before starting;
   unused time is returned after the process exits. A crashed attempt retains its
@@ -68,8 +68,8 @@ response can still cause a duplicate on retry.
 The app uses no always-ready instances and creates no Application Insights resource.
 The daily generation allowance limits report API work, not total Azure billing.
 Storage, timer execution, data transfer and other charges still apply. The live
-resource-group budget is ₹1,500/month with an actual-spend alert at ₹1,000
-(66.6667% of the budget); budgets are alerts rather than hard caps. The private
+resource-group budget is ₹4,500/month with an actual-spend alert at ₹1,000
+(22.2222% of the budget); budgets are alerts rather than hard caps. The private
 PDF prefixes `fleet-report-state/pdf/scania/` and `fleet-report-state/pdf/volvo/`
 have an enabled storage lifecycle rule deleting blobs more than 10 days after
 their last modification. Delivery state and other prefixes are excluded.
@@ -82,7 +82,7 @@ are restored to avoid recreating and resending them during catch-up.
 
 Each completed brand is delivered immediately, with a durable receipt after each
 Telegram acknowledgement. A delayed batch posts one notice to its affected site
-groups after ten minutes. State preserves the 60-minute generation limit;
+groups after ten minutes. State preserves the configured daily generation limit;
 deployment never resets a spent allowance. API outages, source-data latency,
 Telegram outages, or an exhausted allowance can still delay delivery. The
 five-minute timer begins work at each listed cutoff, with PDFs following processing.
