@@ -1,6 +1,6 @@
 """
 pdf_report.py - driverwise Standstill Tracking PDF (reportlab), matches the
-sample layout: title, summary row, 13 columns incl. Drivers, colour highlights,
+sample layout: title, summary row, 12 columns incl. Drivers, colour highlights,
 legend, and a page-2 summary report. No LibreOffice needed.
 """
 import os, datetime as dt
@@ -15,16 +15,16 @@ PINK = colors.HexColor("#FFC7CE"); PINK_TX = colors.HexColor("#9C0006")
 RED  = colors.HexColor("#FF0000"); HDR  = colors.HexColor("#1F4E78")
 
 HEADERS = ["Vehicles","Drivers","Total time\n(hh:mm)","Driving\n(km)","Diesel\nengine on (l)",
-           "Avg diesel\n(km/l)","Standstill\n(%)","Standstill\n(hh:mm)","I-Shift\nPerf %",
-           "Above\neconomy %","Engine\nload %","Coasting\n(%)","Avg diesel\n(l/h)"]
+           "Avg diesel\n(km/l)","Standstill\n(%)","Standstill\n(hh:mm)","Avg Speed\n(km/h)",
+           "Above\neconomy %","Engine\nload %","Coasting\n(%)"]
 KEYS = ["name","drivers","total_hhmm","driving_km","diesel_l","kmpl","standstill_pct",
-        "standstill_hhmm","ishift_pct","economy_pct","engineload_pct","coasting_pct","lph"]
-WIDTHS = [40,78,32,33,40,38,40,40,34,40,34,34,41]  # points, fits A4 PORTRAIT (fit-to-width)
+        "standstill_hhmm","avg_speed","economy_pct","engineload_pct","coasting_pct"]
+WIDTHS = [42,83,40,36,44,40,42,42,43,44,39,40]  # points, fits A4 PORTRAIT (fit-to-width)
 
 def _thr():
     return {"MIN_ENGINE_MIN": 30, "MIN_DRIVING_KM": 15,
             "STANDSTILL_FLAG": 27,
-            "ENGINELOAD_FLAG": 20, "ISHIFT_FLAG": 2,
+            "ENGINELOAD_FLAG": 20,
             "ECONOMY_FLAG": 10, "COASTING_FLAG": 20}
 
 def _n(x):
@@ -62,7 +62,8 @@ def normalize_and_filter_rows(source_rows, thresholds=None):
             "driving_km": source.get("Driving km"), "diesel_l": source.get("Diesel litres"),
             "kmpl": source.get("Avg km/l"), "standstill_pct": source.get("Standstill %"),
             "standstill_hhmm": source.get("Standstill time"),
-            "ishift_pct": source.get("I-Shift %"), "economy_pct": source.get("Above economy %"),
+            "avg_speed": source.get("Avg Speed (km/h)"),
+            "driving_seconds": source.get("Driving seconds"), "economy_pct": source.get("Above economy %"),
             "engineload_pct": source.get("Engine load %"), "coasting_pct": source.get("Coasting %"),
             "lph": source.get("Avg l/h"),
         })
@@ -72,6 +73,13 @@ def normalize_and_filter_rows(source_rows, thresholds=None):
         and _n(row.get("driving_km")) is not None
         and _n(row.get("driving_km")) >= thr["MIN_DRIVING_KM"]
     ]
+
+
+def fleet_average_speed(rows):
+    valid = [r for r in rows if _n(r.get('driving_seconds')) is not None
+             and _n(r.get('driving_seconds')) > 0 and _n(r.get('driving_km')) is not None]
+    seconds = sum(_n(r['driving_seconds']) for r in valid)
+    return sum(_n(r['driving_km']) for r in valid) * 3600 / seconds if seconds else None
 
 
 def report_filename(site, shift, start_dt, end_dt):
@@ -104,7 +112,7 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
         "driving_km": mean("driving_km"), "diesel_l": mean("diesel_l"),
         "kmpl": mean("kmpl", True), "standstill_pct": mean("standstill_pct"),
         "standstill_hhmm": _sum_hhmm(sum(_hhmm_to_min(r["standstill_hhmm"]) for r in rows)),
-        "ishift_pct": mean("ishift_pct"), "economy_pct": mean("economy_pct"),
+        "avg_speed": fleet_average_speed(rows), "economy_pct": mean("economy_pct"),
         "engineload_pct": mean("engineload_pct"), "coasting_pct": mean("coasting_pct"),
         "lph": mean("lph", True),
     }
@@ -127,7 +135,7 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
             v=r.get(k)
             if k in ("name","drivers"):
                 out.append(_wrap(v, bold)); continue
-            if k in ("driving_km","diesel_l","kmpl","standstill_pct","ishift_pct",
+            if k in ("driving_km","diesel_l","kmpl","standstill_pct","avg_speed",
                      "economy_pct","engineload_pct","coasting_pct","lph"):
                 v=_fmt(v)
             out.append(v if v is not None else "-")
@@ -152,12 +160,10 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     for idx,r in enumerate(rows):
         tr=idx+2
         sp=_n(r["standstill_pct"]); el=_n(r["engineload_pct"]); km=_n(r["kmpl"])
-        lh=_n(r["lph"]); ish=_n(r["ishift_pct"]); ec=_n(r["economy_pct"]); co=_n(r["coasting_pct"])
+        ec=_n(r["economy_pct"]); co=_n(r["coasting_pct"])
         if sp is not None and sp>thr["STANDSTILL_FLAG"]: flag(tr,6,RED,colors.white)
         if el is not None and el>thr["ENGINELOAD_FLAG"]: flag(tr,10,RED,colors.white)
         if km is not None and avg_kmpl and km<avg_kmpl:  flag(tr,5,PINK,PINK_TX)
-        if lh is not None and avg_lph  and lh>avg_lph:   flag(tr,12,PINK,PINK_TX)
-        if ish is not None and ish>thr["ISHIFT_FLAG"]:   flag(tr,8,PINK,PINK_TX)
         if ec is not None and ec>thr["ECONOMY_FLAG"]:    flag(tr,9,PINK,PINK_TX)
         if co is not None and co<thr["COASTING_FLAG"]:   flag(tr,11,PINK,PINK_TX)
 
@@ -179,13 +185,12 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     leg=('<font color="#FF0000">&#9632;</font> Standstill &gt;{ss}% &nbsp;'
          '<font color="#9C0006">&#9632;</font> km/l below fleet avg &nbsp;'
          '<font color="#FF0000">&#9632;</font> Engine load &gt;{el}% &nbsp;'
-         '<font color="#9C0006">&#9632;</font> I-Shift &gt;{ish}% &nbsp;'
          '<font color="#9C0006">&#9632;</font> Economy &gt;{ec}% &nbsp;'
          '<font color="#9C0006">&#9632;</font> Coasting &lt;{co}% &nbsp;'
-         '<font color="#9C0006">&#9632;</font> l/h above fleet avg &nbsp;|&nbsp; '
+         'Avg Speed = distance / driving hours &nbsp;|&nbsp; '
          'Sorted: Standstill % descending &nbsp;|&nbsp; '
          'Rows &lt;00:30 or distance &lt;{km:g} km excluded'
-        ).format(ss=thr["STANDSTILL_FLAG"],el=thr["ENGINELOAD_FLAG"],ish=thr["ISHIFT_FLAG"],
+        ).format(ss=thr["STANDSTILL_FLAG"],el=thr["ENGINELOAD_FLAG"],
                  ec=thr["ECONOMY_FLAG"],co=thr["COASTING_FLAG"],
                  km=thr["MIN_DRIVING_KM"])
 

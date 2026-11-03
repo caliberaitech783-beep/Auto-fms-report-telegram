@@ -15,14 +15,14 @@ PAGE_SIZE = portrait(A4)
 HEADERS = [
     "Registration<br/>number", "Engine<br/>running time<br/>(h:m)", "Distance<br/>driven<br/>(km)",
     "Consumption<br/>liquid fuel<br/>(km/l)", "Consumption<br/>liquid fuel<br/>(litres)",
-    "Consumption<br/>liquid fuel<br/>(litres/h)", "Idling (% of<br/>engine running<br/>time)",
-    "Idling<br/>(h:m)", "Performance<br/>mode - Power<br/>(km)",
+    "Idling (% of<br/>engine running<br/>time)",
+    "Idling<br/>(h:m)", "Avg Speed<br/>(km/h)", "Performance<br/>mode - Power<br/>(km)",
     "Performance<br/>mode - Power<br/>(% of distance)", "Powertrain<br/>coasting<br/>(% of distance)",
     "Adjusted<br/>Idling<br/>(%)",
 ]
 KEYS = [
     "Registration number", "Engine running time", "Distance driven", "Consumption km/l",
-    "Consumption litres", "Consumption litres/h", "Idling %", "Idling time",
+    "Consumption litres", "Idling %", "Idling time", "Avg Speed (km/h)",
     "Power km", "Power %", "Coasting %", "Adjusted Idling %",
 ]
 THRESHOLDS = {
@@ -65,7 +65,12 @@ def _summary_row(rows):
         * (_num(row.get("Coasting %")) or 0) / 100
         for row in rows
     )
+    speed_rows = [r for r in rows if (_num(r.get("Driving seconds")) or 0) > 0
+                  and _num(r.get("Distance driven")) is not None]
+    driving_seconds = sum(r["Driving seconds"] for r in speed_rows)
+    average_speed = sum(r["Distance driven"] for r in speed_rows) * 3600 / driving_seconds if driving_seconds else None
     return {
+        "Avg Speed (km/h)": average_speed,
         "Registration number": f"Summary ({len(rows)})",
         "Engine running time": _hhmm(engine_minutes),
         "Distance driven": distance,
@@ -176,7 +181,7 @@ def build_pdf(rows: list[dict], site: str, shift: str, start: datetime, stop: da
 
         summary_offset = 1 if include_summary and table_rows else 0
         table = Table(
-            data, colWidths=[41, 33, 32, 36, 34, 35, 36, 29, 36, 40, 37, 45],
+            data, colWidths=[41, 33, 32, 36, 34, 36, 29, 35, 36, 40, 37, 45],
             repeatRows=1 + summary_offset,
         )
         commands = [
@@ -211,10 +216,8 @@ def build_pdf(rows: list[dict], site: str, shift: str, start: datetime, stop: da
             lph = _num(row.get("Consumption litres/h"))
             if kmpl is not None and kmpl < avg_kmpl:
                 highlight(3, pale, pale_text)
-            if lph is not None and lph > avg_lph:
-                highlight(5, pale, pale_text)
             if not low_activity and (_num(row.get("Adjusted Idling %")) or 0) > THRESHOLDS["idling_pct"]:
-                highlight(11, red)
+                highlight(KEYS.index("Adjusted Idling %"), red)
             if not low_activity and (_num(row.get("Power km")) or 0) > THRESHOLDS["power_km"]:
                 highlight(8, red, colors.white)
             if not low_activity and (_num(row.get("Power %")) or 0) > THRESHOLDS["power_pct"]:
@@ -235,7 +238,7 @@ def build_pdf(rows: list[dict], site: str, shift: str, start: datetime, stop: da
     legend = (
         "<b>Thresholds:</b> Page 1 = engine time at least 00:30 and distance over 15 km | "
         "Page 2 = engine time under 00:30 or distance at/below 15 km (ignition/workshop) | "
-        "km/l below fleet average = light red | litres/h above fleet average = light red | "
+        "km/l below fleet average = light red | Avg Speed = distance / driving hours | "
         "adjusted idling &gt; 28% = red | Power distance &gt; 30 km = red | "
         "Power share &gt; 1% = light red | coasting &lt; 20% = light red | "
         "sorted by adjusted idling % descending"

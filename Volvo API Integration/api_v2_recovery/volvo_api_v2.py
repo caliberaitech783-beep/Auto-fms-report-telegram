@@ -901,6 +901,9 @@ def compute_row(vin: str, w: dict, meta: dict,
         # operational (validated basis)
         "Total time":      _hhmm(total_s),
         "Driving km":      round(distance_km, 1) if distance_km is not None else "",
+        "Driving seconds": driving_s,
+        "Avg Speed (km/h)": round(distance_km * 3600 / driving_s, 2)
+                           if distance_km is not None and driving_s is not None and driving_s > 0 else "",
         "Diesel litres":   round(fuel_l, 1) if fuel_l is not None else "",
         "Avg km/l":        round(distance_km / fuel_l, 2)
                            if distance_km is not None and fuel_l else "",
@@ -1116,8 +1119,7 @@ def _debug_dump(vin: str, w: dict, snaps_sorted: list[dict],
 # Standalone validation runner
 # ---------------------------------------------------------------------------
 COLUMNS = ["Vehicle", "Driver", "Total time", "Driving km", "Diesel litres",
-           "Avg km/l", "Standstill %", "Standstill time", "Avg l/h",
-           "I-Shift %", "Above economy %", "Engine load %", "Coasting %"]
+           "Avg km/l", "Standstill %", "Standstill time", "Avg Speed (km/h)", "Above economy %", "Engine load %", "Coasting %"]
 
 
 def _print_table(rows: list[dict]) -> None:

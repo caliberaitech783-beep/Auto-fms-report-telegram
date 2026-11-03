@@ -104,3 +104,11 @@ Only then disable the desktop Telegram delivery task, enable cloud reporting and
 verify `status.json` plus Telegram receipts. Keep desktop generation tasks intact.
 If cloud verification fails, disable the new cloud worker and re-enable desktop
 Telegram delivery. This avoids changes to existing Azure applications.
+
+## Report columns
+
+New PDFs omit the litres/hour column. Volvo replaces I-Shift Performance with
+Avg Speed (km/h); Scania shows Avg Speed after Idling time. Average speed is
+distance divided by actual driving hours, with unavailable/zero driving time
+shown as missing. Fleet speed uses total distance divided by total valid driving
+time. Internal fuel-rate calculations for adjusted Scania idling are retained.

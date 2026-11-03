@@ -273,6 +273,9 @@ def compute_row(vin: str, diff: dict[str, float], vehicle: dict) -> dict[str, An
         "Engine running time": _hhmm(engine_h),
         "engine_minutes": round(engine_h * 60),
         "Distance driven": round(distance_km, 2),
+        "Driving seconds": diff.get("moving_s"),
+        "Avg Speed (km/h)": round(distance_km * 3600 / diff["moving_s"], 2)
+                           if (diff.get("moving_s") or 0) > 0 else None,
         "Consumption km/l": round(distance_km / fuel_l, 2) if fuel_l else None,
         "Consumption litres": round(fuel_l, 2),
         "Consumption litres/h": round(fuel_l / engine_h, 2) if engine_h else None,
