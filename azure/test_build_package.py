@@ -18,6 +18,7 @@ class PackageTests(unittest.TestCase):
                 names = archive.namelist()
                 self.assertIn('host.json', names)
                 self.assertIn('function_app.py', names)
+                self.assertIn('Volvo API Integration/api_v2_recovery/site_assignments.json', names)
                 self.assertFalse(any('config.json' in name or '.sqlite' in name or '.env' in name for name in names))
                 self.assertTrue(all((item.external_attr >> 16) & 0o777 == 0o644 for item in archive.infolist()))
 

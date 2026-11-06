@@ -130,6 +130,9 @@ def sync_asset_groups(config_path: Path, shifts: dict, base: Path,
                       logger=None) -> tuple[dict, dict | None]:
     """Apply the newest valid asset export and atomically refresh site_config."""
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    manifest_path = base / 'site_assignments.json'
+    if manifest_path.exists() and not os.environ.get('VOLVO_ASSET_EXPORT_FILE'):
+        return sync_assignment_manifest(config_path, config, shifts, manifest_path, logger)
     export_path = find_latest_export(base)
     if export_path is None:
         if logger:
@@ -187,3 +190,43 @@ def sync_asset_groups(config_path: Path, shifts: dict, base: Path,
     if logger:
         logger.info("Asset groups synchronized from %s: %s", export_path, summary["counts"])
     return config, sync_info
+
+
+def sync_assignment_manifest(config_path, config, shifts, manifest_path, logger=None):
+    """A reviewed full-fleet export owns every site's VIN membership."""
+    digest = _digest(manifest_path)
+    if config.get('_assignment_revision') == digest:
+        return config, config.get('_asset_sync')
+    manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+    if manifest.get('schema_version') != 1:
+        raise ValueError('Unsupported site-assignment manifest version')
+    supplied = manifest.get('sites') or {}
+    expected = set(shifts['sites']) - {UNKNOWN_SITE}
+    if set(supplied) != expected:
+        raise ValueError('Assignment sites do not match the configured shift sites')
+    previous = {v['vin']: v for node in config.get('sites', {}).values()
+                for v in node.get('vehicles', []) if v.get('vin')}
+    seen = set()
+    sites = {}
+    for site, node in supplied.items():
+        vehicles = []
+        for item in node['vehicles']:
+            vin = str(item.get('vin') or '').strip().upper()
+            if len(vin) != 17 or vin in seen:
+                raise ValueError('Invalid or duplicate VIN in assignment manifest')
+            seen.add(vin)
+            vehicles.append({**previous.get(vin, {}), **item, 'vin': vin})
+        if not vehicles or node.get('count') != len(vehicles):
+            raise ValueError('Missing vehicles or inconsistent assignment count for ' + site)
+        sites[site] = {'count': len(vehicles), 'vehicles': vehicles}
+    sites[UNKNOWN_SITE] = {'count': 0, 'vehicles': []}
+    info = {'source': manifest['source_file'], 'source_sha256': manifest['source_sha256'],
+            'effective_date': manifest['effective_date'], 'sha256': digest,
+            'counts': {site: node['count'] for site, node in sites.items()}, 'mapped': len(seen)}
+    updated = {**config, 'sites': sites, '_asset_sync': info, '_assignment_revision': digest}
+    temporary = config_path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(updated, indent=2), encoding='utf-8')
+    temporary.replace(config_path)
+    if logger:
+        logger.info('Applied authoritative site assignments: %s', info['counts'])
+    return updated, info

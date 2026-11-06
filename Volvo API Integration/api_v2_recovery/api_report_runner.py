@@ -154,7 +154,7 @@ def main(as_of: str | None = None, since: str | None = None, collect_only: bool 
         try:
             if collect_only and cache.get('coverage'):
                 fetch_start = volvo.parse_when(cache.get('coverage')['start'])
-            site_cfg = cache.get('site_config', site_cfg)
+            site_cfg = cache.use_assignments(site_cfg)
             # Metadata discovery is independent of status pagination. Preserve the
             # last valid names/mappings if Volvo's inventory endpoint is down.
             try:
@@ -214,6 +214,9 @@ def main(as_of: str | None = None, since: str | None = None, collect_only: bool 
                             "Driver": meta.get("driver", "Unknown")})
             else:
                 row = volvo.compute_row(vin, diff, meta)
+            row['_vin'] = vin
+            row['_data_status'] = (('Insufficient API history for this period' if by_vin.get(vin)
+                                    else 'No API history for this period') if diff is None else '')
             rows.append(row)
 
         try:

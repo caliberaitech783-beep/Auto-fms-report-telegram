@@ -1,35 +1,7 @@
 {
-  "_note": "IST shifts. Jayant East/West/2: 04:00-12:00, 12:00-20:00, 20:00-04:00. Other sites: 05:00-13:00, 13:00-21:00, 21:00-05:00. End minute is inclusive; partial reports stop exactly at their cutoff.",
+  "_note": "IST shifts. Jayant East/West Top/Hard Bench: 04:00-12:00, 12:00-20:00, 20:00-04:00. Other sites: 05:00-13:00, 13:00-21:00, 21:00-05:00. End minute is inclusive; partial reports stop exactly at their cutoff.",
   "sites": {
     "Jayant East": {
-      "A": [
-        "04:00",
-        "11:59"
-      ],
-      "B": [
-        "12:00",
-        "19:59"
-      ],
-      "C": [
-        "20:00",
-        "03:59"
-      ]
-    },
-    "Jayant West": {
-      "A": [
-        "04:00",
-        "11:59"
-      ],
-      "B": [
-        "12:00",
-        "19:59"
-      ],
-      "C": [
-        "20:00",
-        "03:59"
-      ]
-    },
-    "Jayant 2": {
       "A": [
         "04:00",
         "11:59"
@@ -139,6 +111,34 @@
       "C": [
         "21:00",
         "04:59"
+      ]
+    },
+    "Jayant West Top": {
+      "A": [
+        "04:00",
+        "11:59"
+      ],
+      "B": [
+        "12:00",
+        "19:59"
+      ],
+      "C": [
+        "20:00",
+        "03:59"
+      ]
+    },
+    "Jayant Hard Bench": {
+      "A": [
+        "04:00",
+        "11:59"
+      ],
+      "B": [
+        "12:00",
+        "19:59"
+      ],
+      "C": [
+        "20:00",
+        "03:59"
       ]
     }
   }

@@ -1,6 +1,7 @@
 """Resumable fleet history and live inventory; private state is stored in Azure."""
 from datetime import datetime, timedelta
 import json
+import hashlib
 import os
 from pathlib import Path
 import re
@@ -98,7 +99,19 @@ class FleetCache:
             'SELECT body FROM snapshots WHERE event>=? AND event<=? ORDER BY event',
             (volvo._utc_z(start), volvo._utc_z(stop)))]
 
+    def use_assignments(self, site_cfg):
+        """A new source assignment list must replace, rather than lose to, cache."""
+        revision = site_cfg.get('_assignment_revision') or hashlib.sha256(
+            json.dumps(site_cfg.get('sites', {}), sort_keys=True).encode()).hexdigest()
+        if self.get('assignment_revision') != revision:
+            site_cfg = {**site_cfg, '_assignment_revision': revision}
+            self.put('site_config', site_cfg)
+            self.put('assignment_revision', revision)
+            return site_cfg
+        return self.get('site_config', site_cfg)
+
     def metadata(self, auth, site_cfg, sites, now, force_inventory=False):
+        site_cfg = self.use_assignments(site_cfg)
         previous = self.get('inventory_checked')
         # Refresh before every cutoff, while caching directory calls between cutoffs.
         report_refresh = force_inventory and self.get('inventory_cutoff') != now.isoformat()

@@ -371,6 +371,9 @@ def _run_locked(container, ensure_lease):
                 with closing(sqlite3.connect(cache_file)) as cache_db:
                     metadata = {key: json.loads(value) for key, value in cache_db.execute('SELECT key,value FROM metadata')}
                     health = {'coverage': metadata.get('coverage'), 'pending_query': metadata.get('pending'),
+                              'assignment_revision': metadata.get('assignment_revision'),
+                              'site_vehicle_counts': {site: len(node.get('vehicles', []))
+                                  for site, node in metadata.get('site_config', {}).get('sites', {}).items()},
                               'unassigned_vehicle_count': len(metadata.get('unassigned_vehicles', [])),
                               'inventory_checked': metadata.get('inventory_checked'),
                               'metadata_error': metadata.get('metadata_error')}

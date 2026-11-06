@@ -15,7 +15,7 @@ def build(destination):
     for folder in ('Scania API Integration', 'Volvo API Integration/api_v2_recovery'):
         base = ROOT / folder
         for source in base.iterdir():
-            if source.suffix == '.py' or source.name in ('shifts.json', 'sasti_dataaccess.tsv', 'dudhichua_dataaccess.tsv'):
+            if source.suffix == '.py' or source.name in ('shifts.json', 'site_assignments.json', 'sasti_dataaccess.tsv', 'dudhichua_dataaccess.tsv'):
                 entries[f'{folder}/{source.name}'] = source
     destination.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(destination, 'w', zipfile.ZIP_DEFLATED) as archive:

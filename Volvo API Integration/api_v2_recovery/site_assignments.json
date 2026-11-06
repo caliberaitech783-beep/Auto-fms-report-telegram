@@ -1,0 +1,4703 @@
+{
+  "schema_version": 1,
+  "effective_date": "2026-11-04",
+  "source_file": "Caliber Mercantile - assets - 2026-11-04.xlsx",
+  "source_sha256": "db8710f80bd901504bac94ac949aa76bd09c28aa49817293dd930b45da04fc16",
+  "sites": {
+    "Dhoptala": {
+      "count": 30,
+      "vehicles": [
+        {
+          "vin": "YV2XBZ0G0R8986516",
+          "name": "V 331",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8995542",
+          "name": "V 584",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8995543",
+          "name": "V 585",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8995544",
+          "name": "V 586",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8995545",
+          "name": "V 587",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995546",
+          "name": "V 588",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995547",
+          "name": "V 589",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8996803",
+          "name": "V 591",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8996804",
+          "name": "V 592",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8996893",
+          "name": "V 593",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8996894",
+          "name": "V 594",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8996895",
+          "name": "V 595",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8998035",
+          "name": "V 663",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902554",
+          "name": "V 937",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902556",
+          "name": "V 938",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902557",
+          "name": "V 939",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8902558",
+          "name": "V 940",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8902559",
+          "name": "V 941",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902381",
+          "name": "V 942",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902697",
+          "name": "V 943",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902694",
+          "name": "V 951",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902700",
+          "name": "V 953",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902705",
+          "name": "V 954",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902844",
+          "name": "V 955",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8902951",
+          "name": "V 958",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0V8902977",
+          "name": "V 984",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8V8902984",
+          "name": "V 985",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3V8902987",
+          "name": "V 986",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1V8903071",
+          "name": "V 987",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0V8903076",
+          "name": "V 988",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Dudhichua East": {
+      "count": 164,
+      "vehicles": [
+        {
+          "vin": "YV2XG30G3T8900735",
+          "name": "747",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901723",
+          "name": "V-827",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901532",
+          "name": "V-843",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901534",
+          "name": "V-845",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901535",
+          "name": "V-846",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901897",
+          "name": "V-872",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901902",
+          "name": "V-877",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901907",
+          "name": "V-882",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901908",
+          "name": "V-883",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901910",
+          "name": "V-885",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901911",
+          "name": "V-886",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901996",
+          "name": "V-891-901996",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30G1T8902001",
+          "name": "V-896",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8902006",
+          "name": "V-901",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902007",
+          "name": "V-902",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902010",
+          "name": "V-905",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8902015",
+          "name": "V-910",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8902130",
+          "name": "V-913",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8902256",
+          "name": "V-916",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902257",
+          "name": "V-917-902257",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30G1T8902404",
+          "name": "V-921",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902410",
+          "name": "V-925-902410",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30GXT8900392",
+          "name": "V732",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900403",
+          "name": "V733",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900404",
+          "name": "V734",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8900405",
+          "name": "V735",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900407",
+          "name": "V736",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8900408",
+          "name": "V737",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900602",
+          "name": "V738",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900614",
+          "name": "V739",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900617",
+          "name": "V740",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8900401",
+          "name": "V741",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900728",
+          "name": "V742",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8900730",
+          "name": "V743",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900732",
+          "name": "V744",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8900733",
+          "name": "V745",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900745",
+          "name": "V747",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900406",
+          "name": "V748",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900729",
+          "name": "V749",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900731",
+          "name": "V750",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8900734",
+          "name": "V751",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8900736",
+          "name": "V752",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8900737",
+          "name": "V753",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900742",
+          "name": "V754",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900746",
+          "name": "V755",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8900749",
+          "name": "V756",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8900750",
+          "name": "V757",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8900740",
+          "name": "V759",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900743",
+          "name": "V760",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8900747",
+          "name": "V761",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8900748",
+          "name": "V762",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8900751",
+          "name": "V763",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8900752",
+          "name": "V764",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8900753",
+          "name": "V765",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8900754",
+          "name": "V766",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900756",
+          "name": "V767",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900757",
+          "name": "V768",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900760",
+          "name": "V769",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8900761",
+          "name": "V770",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8900765",
+          "name": "V771",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8900766",
+          "name": "V772",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8900767",
+          "name": "V773",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901033",
+          "name": "V774",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901035",
+          "name": "V775",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901036",
+          "name": "V776",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901064",
+          "name": "V807",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901069",
+          "name": "V808",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901290",
+          "name": "V809",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901292",
+          "name": "V810",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901294",
+          "name": "V811",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901296",
+          "name": "V812",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901298",
+          "name": "V813",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901302",
+          "name": "V814",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901303",
+          "name": "V815",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901304",
+          "name": "V816",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901505",
+          "name": "V817",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901509",
+          "name": "V818",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901510",
+          "name": "V819",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901511",
+          "name": "V820",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901512",
+          "name": "V821",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901513",
+          "name": "V822",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901514",
+          "name": "V823",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901515",
+          "name": "V824",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901516",
+          "name": "V825",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901517",
+          "name": "V826",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901504",
+          "name": "V828",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901518",
+          "name": "V829",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901519",
+          "name": "V830",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30G9T8901520",
+          "name": "V831",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901521",
+          "name": "V832",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901522",
+          "name": "V833",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901523",
+          "name": "V834",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901524",
+          "name": "V835",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30G8T8901525",
+          "name": "V836",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901526",
+          "name": "V837",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901527",
+          "name": "V838",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901528",
+          "name": "V839",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30G5T8901529",
+          "name": "V840",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901530",
+          "name": "V841",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901531",
+          "name": "V842",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901533",
+          "name": "V844",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30G2T8901536",
+          "name": "V847",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901537",
+          "name": "V848",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901538",
+          "name": "V849",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901542",
+          "name": "V850",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901543",
+          "name": "V851",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901694",
+          "name": "V852",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901697",
+          "name": "V853",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901698",
+          "name": "V854",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901700",
+          "name": "V855",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901701",
+          "name": "V856",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901708",
+          "name": "V864",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901709",
+          "name": "V865",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901712",
+          "name": "V868",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901713",
+          "name": "V869",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901714",
+          "name": "V870",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901898",
+          "name": "V873",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901899",
+          "name": "V874",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901900",
+          "name": "V875",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901901",
+          "name": "V876",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901903",
+          "name": "V878",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901904",
+          "name": "V879",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901905",
+          "name": "V880",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901906",
+          "name": "V881",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901909",
+          "name": "V884",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901912",
+          "name": "V887",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901913",
+          "name": "V888",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901914",
+          "name": "V889",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901915",
+          "name": "V890",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901997",
+          "name": "V892",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901998",
+          "name": "V893",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901999",
+          "name": "V894",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902000",
+          "name": "V895",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902002",
+          "name": "V897",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902003",
+          "name": "V898",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902004",
+          "name": "V899",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902005",
+          "name": "V900",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902008",
+          "name": "V903",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8902009",
+          "name": "V904",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902011",
+          "name": "V906",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8902012",
+          "name": "V907",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8902013",
+          "name": "V908",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902014",
+          "name": "V909",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902128",
+          "name": "V911",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902129",
+          "name": "V912",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902131",
+          "name": "V914",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902132",
+          "name": "V915",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902258",
+          "name": "V918",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902259",
+          "name": "V919",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902403",
+          "name": "V920",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902405",
+          "name": "V922",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902406",
+          "name": "V923",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902408",
+          "name": "V924",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902411",
+          "name": "V926-902411",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8902412",
+          "name": "V927-902412",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902413",
+          "name": "V928-902413",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902414",
+          "name": "V929-902414",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8902415",
+          "name": "V930-902415",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902543",
+          "name": "V931-902543",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8902544",
+          "name": "V932-902544",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8902545",
+          "name": "V933-902545",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XG30GXT8902546",
+          "name": "V934-902546",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902407",
+          "name": "V935",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8902547",
+          "name": "V936",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Dudhichua West": {
+      "count": 118,
+      "vehicles": [
+        {
+          "vin": "YV2XBZ0GXS8994175",
+          "name": "421",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994267",
+          "name": "423",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994270",
+          "name": "424",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994355",
+          "name": "425",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994356",
+          "name": "426",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994358",
+          "name": "427",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994360",
+          "name": "428",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8994364",
+          "name": "432",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994365",
+          "name": "433",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994366",
+          "name": "434",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994367",
+          "name": "435",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994368",
+          "name": "436",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994369",
+          "name": "437",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994370",
+          "name": "438",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994372",
+          "name": "439",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994429",
+          "name": "440",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994436",
+          "name": "443",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994437",
+          "name": "444",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994438",
+          "name": "445",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994439",
+          "name": "446",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994440",
+          "name": "447",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994441",
+          "name": "448",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994442",
+          "name": "449",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994444",
+          "name": "450",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994427",
+          "name": "451",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994433",
+          "name": "452",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994435",
+          "name": "453",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994446",
+          "name": "455",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994447",
+          "name": "456",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994449",
+          "name": "458",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994453",
+          "name": "459",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994455",
+          "name": "460",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994523",
+          "name": "461",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994527",
+          "name": "462",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994797",
+          "name": "464",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994800",
+          "name": "465",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8994803",
+          "name": "467",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994804",
+          "name": "468",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994805",
+          "name": "469",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994807",
+          "name": "471",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994808",
+          "name": "472",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994809",
+          "name": "473",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994810",
+          "name": "474",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994812",
+          "name": "475",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994813",
+          "name": "476",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994815",
+          "name": "477",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8994817",
+          "name": "478",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994819",
+          "name": "479",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8994820",
+          "name": "480",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994842",
+          "name": "482",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995000",
+          "name": "539",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995001",
+          "name": "540",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995002",
+          "name": "541",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995020",
+          "name": "551",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995093",
+          "name": "552",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995095",
+          "name": "554",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995096",
+          "name": "555",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8995514",
+          "name": "556",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995515",
+          "name": "557",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995516",
+          "name": "558",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995517",
+          "name": "559",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995518",
+          "name": "560",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8995519",
+          "name": "561",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995520",
+          "name": "562",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995521",
+          "name": "563",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8995522",
+          "name": "564",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8995523",
+          "name": "565",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8995524",
+          "name": "566",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8995525",
+          "name": "567",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8995526",
+          "name": "568",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8995527",
+          "name": "569",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8995528",
+          "name": "570",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995529",
+          "name": "571",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8995531",
+          "name": "573",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995532",
+          "name": "574",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995533",
+          "name": "575",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995534",
+          "name": "576",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995535",
+          "name": "577",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8995536",
+          "name": "578",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8995537",
+          "name": "579",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8995538",
+          "name": "580",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8995539",
+          "name": "581",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8995540",
+          "name": "582",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8995541",
+          "name": "583",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994424",
+          "name": "DEMO-10(1)",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994423",
+          "name": "DEMO-9",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8997224",
+          "name": "DEMO-9(2)",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994990",
+          "name": "V 505",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994991",
+          "name": "V 506",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994993",
+          "name": "V 508",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8995530",
+          "name": "V 572",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994264",
+          "name": "V422",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994361",
+          "name": "V429",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994362",
+          "name": "V430",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994363",
+          "name": "V431",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994430",
+          "name": "V441",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994434",
+          "name": "V442",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994448",
+          "name": "V457",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994796",
+          "name": "V463",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994801",
+          "name": "V466",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994806",
+          "name": "V470",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994840",
+          "name": "V481",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995094",
+          "name": "V553",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8996921",
+          "name": "V616",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8996922",
+          "name": "V617",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8997208",
+          "name": "V631",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997213",
+          "name": "V632",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8997216",
+          "name": "V633",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8997218",
+          "name": "V634",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8997219",
+          "name": "V636",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8997220",
+          "name": "V637",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8997222",
+          "name": "V638",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8997221",
+          "name": "V639",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8997223",
+          "name": "V640",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8997345",
+          "name": "V641",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8997347",
+          "name": "V642",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997356",
+          "name": "V643",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8997357",
+          "name": "V644",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Gouri": {
+      "count": 132,
+      "vehicles": [
+        {
+          "vin": "YV2XG30GXT8900389",
+          "name": "720",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900390",
+          "name": "721",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8900393",
+          "name": "723",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8900394",
+          "name": "724",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8900395",
+          "name": "725",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8900396",
+          "name": "726",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8900397",
+          "name": "727",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900398",
+          "name": "728",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900399",
+          "name": "729",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8900400",
+          "name": "730",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8996896",
+          "name": "V 596",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8996897",
+          "name": "V 597",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8996898",
+          "name": "V 598",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8996899",
+          "name": "V 599",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8996900",
+          "name": "V 600",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8996901",
+          "name": "V 601",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8996902",
+          "name": "V 602",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8996912",
+          "name": "V 607",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8996913",
+          "name": "V 608",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8997019",
+          "name": "V 621",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997020",
+          "name": "V 622",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8997206",
+          "name": "V 623",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8997207",
+          "name": "V 624",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8997209",
+          "name": "V 625",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8997210",
+          "name": "V 626",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8997211",
+          "name": "V 627",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8997212",
+          "name": "V 628",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8997214",
+          "name": "V 629",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8997215",
+          "name": "V 630",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997227",
+          "name": "V 648",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8997228",
+          "name": "V 649",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8997229",
+          "name": "V 650",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997230",
+          "name": "V 651",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8997231",
+          "name": "V 652",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8997232",
+          "name": "V 653",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8997233",
+          "name": "V 654",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8997234",
+          "name": "V 655",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8997235",
+          "name": "V 656",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8997236",
+          "name": "V 657",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8997768",
+          "name": "V 658",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8997769",
+          "name": "V 659",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8997770",
+          "name": "V 660",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8997771",
+          "name": "V 661",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8997772",
+          "name": "V 662",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8998036",
+          "name": "V 664",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8998040",
+          "name": "V 665",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8998044",
+          "name": "V 666",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8998046",
+          "name": "V 667",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8998047",
+          "name": "V 668",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8998048",
+          "name": "V 669",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8998050",
+          "name": "V 670",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8998051",
+          "name": "V 671",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8998052",
+          "name": "V 672",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8998053",
+          "name": "V 673",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8998055",
+          "name": "V 674",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8997239",
+          "name": "V 675",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8997240",
+          "name": "V 676",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8997241",
+          "name": "V 677",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8997242",
+          "name": "V 678",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8997243",
+          "name": "V 679",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997244",
+          "name": "V 680",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8997358",
+          "name": "V 681",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8997359",
+          "name": "V 682",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8997360",
+          "name": "V 683",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8997479",
+          "name": "V 684",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8998962",
+          "name": "V 685",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8998963",
+          "name": "V 686",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8998964",
+          "name": "V 687",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8998965",
+          "name": "V 688",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8998966",
+          "name": "V 689",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8998968",
+          "name": "V 690",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8998981",
+          "name": "V 691",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8998982",
+          "name": "V 692",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8998983",
+          "name": "V 693",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8998984",
+          "name": "V 694",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8999063",
+          "name": "V 695",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8999065",
+          "name": "V 696",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8999073",
+          "name": "V 697",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8999074",
+          "name": "V 698",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8999075",
+          "name": "V 699",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900045",
+          "name": "V-700",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900046",
+          "name": "V-701",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8900047",
+          "name": "V-702",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900225",
+          "name": "V-703",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900227",
+          "name": "V-705",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900228",
+          "name": "V-706",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8900229",
+          "name": "V-707",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900230",
+          "name": "V-708",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900231",
+          "name": "V-709",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8900232",
+          "name": "V-710",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8900235",
+          "name": "V-711",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8900237",
+          "name": "V-712",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900238",
+          "name": "V-713",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900239",
+          "name": "V-714",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8900240",
+          "name": "V-715",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8900241",
+          "name": "V-716",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8900242",
+          "name": "V-717",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8900243",
+          "name": "V-718",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8900244",
+          "name": "V-719",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8900391",
+          "name": "V-722",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8900402",
+          "name": "V-731",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902847",
+          "name": "V959-902847",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902850",
+          "name": "V960-902850",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902854",
+          "name": "V961-902854",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902861",
+          "name": "V962-902861",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902952",
+          "name": "V963-902952",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902957",
+          "name": "V964-902957",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902960",
+          "name": "V965-902960",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902862",
+          "name": "V966-902862",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8902965",
+          "name": "V967-902965",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902968",
+          "name": "V968-902968",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXV8902971",
+          "name": "V969-902971",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1V8902972",
+          "name": "V970-902972",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902865",
+          "name": "V971-902865",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8902866",
+          "name": "V972-902866",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5V8903073",
+          "name": "V973-903073",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9V8903075",
+          "name": "V974-903075",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6V8903082",
+          "name": "V975-903082",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7V8903074",
+          "name": "V976-903074",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4V8903078",
+          "name": "V977-903078",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6V8903079",
+          "name": "V978-903079",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2V8903080",
+          "name": "V979-903080",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4V8903081",
+          "name": "V980-903081",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXV8903084",
+          "name": "V981-903084",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9V8903092",
+          "name": "V982-903092",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0V8903093",
+          "name": "V983-903093",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2V8903077",
+          "name": "V989-903077",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3V8903086",
+          "name": "V990-903086",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5V8903087",
+          "name": "V991-903087",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5V8903090",
+          "name": "V992-903090",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2V8903094",
+          "name": "V993-903094",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1V8903099",
+          "name": "V994-903099",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Jayant East": {
+      "count": 66,
+      "vehicles": [
+        {
+          "vin": "YV2XBZ0G9P8984700",
+          "name": "V216",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8985042",
+          "name": "V241",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8985037",
+          "name": "V246",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8985287",
+          "name": "V247",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8985290",
+          "name": "V248",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8985291",
+          "name": "V249",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8985292",
+          "name": "V259",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8985623",
+          "name": "V278",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8985626",
+          "name": "V281",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8985629",
+          "name": "V284",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8985631",
+          "name": "V286",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8985632",
+          "name": "V287",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8985635",
+          "name": "V290",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8985636",
+          "name": "V291",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8986030",
+          "name": "V297",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8986026",
+          "name": "V300",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8986027",
+          "name": "V301",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8986033",
+          "name": "V302",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8986038",
+          "name": "V303",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8986213",
+          "name": "V305",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8986469",
+          "name": "V306",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8986470",
+          "name": "V307",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8986471",
+          "name": "V308",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8986473",
+          "name": "V310",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8986474",
+          "name": "V311",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8986475",
+          "name": "V312",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8986476",
+          "name": "V313",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8986478",
+          "name": "V315",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8986479",
+          "name": "V316",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8986480",
+          "name": "V317",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8986481",
+          "name": "V318",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8986503",
+          "name": "V319",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8986505",
+          "name": "V321",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8986506",
+          "name": "V322",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8986507",
+          "name": "V323",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8986508",
+          "name": "V324",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8986509",
+          "name": "V325",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8986510",
+          "name": "V326",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8986511",
+          "name": "V327",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8986512",
+          "name": "V328",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8986515",
+          "name": "V330",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8987612",
+          "name": "V337",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8987613",
+          "name": "V338",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8987614",
+          "name": "V339",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8987813",
+          "name": "V341",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8987800",
+          "name": "V342",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8987809",
+          "name": "V343",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8987824",
+          "name": "V344",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8988111",
+          "name": "V346",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8988119",
+          "name": "V347",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8988120",
+          "name": "V348",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8988209",
+          "name": "V349",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8989027",
+          "name": "V384",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8989032",
+          "name": "V387",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8993296",
+          "name": "V393",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8993298",
+          "name": "V395",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8993299",
+          "name": "V396",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8993302",
+          "name": "V397",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8993300",
+          "name": "V398",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8993301",
+          "name": "V399",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8993306",
+          "name": "V402",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8993307",
+          "name": "V403",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8993308",
+          "name": "V404",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8993309",
+          "name": "V405",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8993310",
+          "name": "V406",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8993406",
+          "name": "V407",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Jayant Hard Bench": {
+      "count": 48,
+      "vehicles": [
+        {
+          "vin": "YV2XBZ0G0P8976596",
+          "name": "V117",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8976597",
+          "name": "V118",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4P8976598",
+          "name": "V119",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7P8976594",
+          "name": "V120",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9P8976595",
+          "name": "V121",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XTY0G6P8977467",
+          "name": "V136",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G1P8977473",
+          "name": "V137",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G9P8977477",
+          "name": "V138",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G9P8977480",
+          "name": "V139",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G6P8977484",
+          "name": "V140",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G8P8977485",
+          "name": "V141",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0GXP8977486",
+          "name": "V142",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G1P8977487",
+          "name": "V143",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XTY0G3P8977488",
+          "name": "V144",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G4P8978271",
+          "name": "V148",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXP8978274",
+          "name": "V149",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1P8978275",
+          "name": "V150",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3P8978276",
+          "name": "V151",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5P8978277",
+          "name": "V152",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1P8978714",
+          "name": "V153",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3P8978715",
+          "name": "V154",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9P8978721",
+          "name": "V155",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8978723",
+          "name": "V156",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8P8978726",
+          "name": "V157",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8979080",
+          "name": "V158",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXP8979084",
+          "name": "V160",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6P8979079",
+          "name": "V161",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8P8979083",
+          "name": "V162",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9P8984065",
+          "name": "V188",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8984439",
+          "name": "V189",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9P8984440",
+          "name": "V190",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8984442",
+          "name": "V191",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1P8984447",
+          "name": "V192",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0P8984441",
+          "name": "V193",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6P8984444",
+          "name": "V194",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXP8984446",
+          "name": "V195",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8P8984445",
+          "name": "V196",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4P8984443",
+          "name": "V197",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3P8984448",
+          "name": "V198",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9P8984454",
+          "name": "V199",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0P8984455",
+          "name": "V200",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8984456",
+          "name": "V201",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3P8984692",
+          "name": "V205",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0P8984696",
+          "name": "V206",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4P8984698",
+          "name": "V207",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5P8984693",
+          "name": "V208",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7P8984694",
+          "name": "V209",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1P8984691",
+          "name": "V213",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Jayant West Top": {
+      "count": 106,
+      "vehicles": [
+        {
+          "vin": "YV2XG30G9T8900738",
+          "name": "V-758",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901037",
+          "name": "V-777",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901038",
+          "name": "V-778",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901039",
+          "name": "V-779",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901041",
+          "name": "V-780",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901042",
+          "name": "V-781",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901043",
+          "name": "V-782",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901044",
+          "name": "V-783",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901045",
+          "name": "V-784",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901046",
+          "name": "V-785",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901047",
+          "name": "V-786",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901048",
+          "name": "V-787",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901040",
+          "name": "V-788",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901049",
+          "name": "V-789",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8901050",
+          "name": "V-790",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901052",
+          "name": "V-791",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901055",
+          "name": "V-792",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901056",
+          "name": "V-793",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901057",
+          "name": "V-794",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901058",
+          "name": "V-795",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901060",
+          "name": "V-796",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901061",
+          "name": "V-797",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901053",
+          "name": "V-798",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901054",
+          "name": "V-799",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901059",
+          "name": "V-800",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8901063",
+          "name": "V-802",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8901051",
+          "name": "V-803",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901068",
+          "name": "V-804",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8901702",
+          "name": "V-857",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G6T8901703",
+          "name": "V-858",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8901704",
+          "name": "V-859",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901705",
+          "name": "V-860",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8901706",
+          "name": "V-861",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901707",
+          "name": "V-862",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901688",
+          "name": "V-863",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8901710",
+          "name": "V-866",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901711",
+          "name": "V-867",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8901715",
+          "name": "V-871",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902962",
+          "name": "V1000-902962",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3P8984689",
+          "name": "V203",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXP8984690",
+          "name": "V204",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8984697",
+          "name": "V210",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8984705",
+          "name": "V211",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8984706",
+          "name": "V212",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9P8984695",
+          "name": "V214",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6P8984699",
+          "name": "V215",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2P8984702",
+          "name": "V217",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8984703",
+          "name": "V218",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8984704",
+          "name": "V219",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8985025",
+          "name": "V220",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8985026",
+          "name": "V221",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8985028",
+          "name": "V223",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8985029",
+          "name": "V224",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8985041",
+          "name": "V236",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8985043",
+          "name": "V237",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8985273",
+          "name": "V238",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8985274",
+          "name": "V239",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8985039",
+          "name": "V240",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8985044",
+          "name": "V242",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8985622",
+          "name": "V277",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8985624",
+          "name": "V279",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8985625",
+          "name": "V280",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8985627",
+          "name": "V282",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8985630",
+          "name": "V285",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8985633",
+          "name": "V288",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8985634",
+          "name": "V289",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8985637",
+          "name": "V292",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8985638",
+          "name": "V293",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8985639",
+          "name": "V294",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8985640",
+          "name": "V295",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8985641",
+          "name": "V296",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8986034",
+          "name": "V298",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8986020",
+          "name": "V299",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8986212",
+          "name": "V304",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8986472",
+          "name": "V309",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8986504",
+          "name": "V320",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8986514",
+          "name": "V329",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8987810",
+          "name": "V340",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8988109",
+          "name": "V345",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8988674",
+          "name": "V374",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8988675",
+          "name": "V375",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8988676",
+          "name": "V376",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G3R8988678",
+          "name": "V377",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8989019",
+          "name": "V378",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8989020",
+          "name": "V379",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8989022",
+          "name": "V380",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G3R8989023",
+          "name": "V381",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8989024",
+          "name": "V382",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8989025",
+          "name": "V383",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8989029",
+          "name": "V385",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8989031",
+          "name": "V386",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G8S8993297",
+          "name": "V394",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8993303",
+          "name": "V400",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8993305",
+          "name": "V401",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8993304",
+          "name": "V408",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8993407",
+          "name": "V409",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8993410",
+          "name": "V410",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8993412",
+          "name": "V411",
+          "service_status": "-",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8993413",
+          "name": "V412",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8901062",
+          "name": "V801",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902949",
+          "name": "V995-902949",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8902954",
+          "name": "V996-902954",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8902955",
+          "name": "V997-902955",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902959",
+          "name": "V998-902959",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8902961",
+          "name": "V999-902961",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902963",
+          "name": "YV2XG30G4T8902963",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Majri": {
+      "count": 92,
+      "vehicles": [
+        {
+          "vin": "YV2XBZ0G2S8994798",
+          "name": "496-994798",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994799",
+          "name": "497-994799",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8994802",
+          "name": "498-994802",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994844",
+          "name": "499-994844",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994989",
+          "name": "504-994989",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8994992",
+          "name": "507-994992",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8994994",
+          "name": "509-994994",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8994995",
+          "name": "510-994995",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994996",
+          "name": "511-994996",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8994997",
+          "name": "512-994997",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994998",
+          "name": "513-994998",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8994999",
+          "name": "514-994999",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995003",
+          "name": "515-995003",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8995004",
+          "name": "516-995004",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8995005",
+          "name": "517-995005",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8995006",
+          "name": "518-995006",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8995008",
+          "name": "520-995008",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8995009",
+          "name": "521-995009",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8995010",
+          "name": "522-995010",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8995011",
+          "name": "523",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8995012",
+          "name": "524-995012",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8995013",
+          "name": "525-995013",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8995014",
+          "name": "526-995014",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995015",
+          "name": "527-995015",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995016",
+          "name": "528-995016",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995017",
+          "name": "529-995017",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8995018",
+          "name": "530-995018",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8995019",
+          "name": "531-995019",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8995435",
+          "name": "532-995435",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8995450",
+          "name": "533-995450",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8995453",
+          "name": "534-995453",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8995456",
+          "name": "535-995456",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8995458",
+          "name": "536-995458",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8995459",
+          "name": "537-995459",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8995460",
+          "name": "538-995460",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8900226",
+          "name": "704-900226",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8995007",
+          "name": "V 519",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8996914",
+          "name": "V 609",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8996915",
+          "name": "V 610",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8996916",
+          "name": "V 611",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8996917",
+          "name": "V 612",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8996918",
+          "name": "V 613",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8996919",
+          "name": "V 614",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8996920",
+          "name": "V 615",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8997012",
+          "name": "V 618",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8997017",
+          "name": "V 619",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8997018",
+          "name": "V 620",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8996784",
+          "name": "V 645",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G3T8997225",
+          "name": "V 646",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8997226",
+          "name": "V 647",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8987954",
+          "name": "V-354",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8993785",
+          "name": "V-413",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8993788",
+          "name": "V-414",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8993789",
+          "name": "V-415",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8993790",
+          "name": "V-416",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8993791",
+          "name": "V-417",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8993793",
+          "name": "V-418",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8993833",
+          "name": "V-419",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1S8993836",
+          "name": "V-420",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2R8986517",
+          "name": "V332",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4R8986518",
+          "name": "V333",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8986519",
+          "name": "V334",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G2R8986520",
+          "name": "V335",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8986482",
+          "name": "V336",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8987951",
+          "name": "V350",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8987952",
+          "name": "V351",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8987953",
+          "name": "V352",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8988562",
+          "name": "V353",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9R8987955",
+          "name": "V355",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8987956",
+          "name": "V356",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G8R8988563",
+          "name": "V357",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0GXR8988564",
+          "name": "V358",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8988565",
+          "name": "V359",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3R8988566",
+          "name": "V360",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8988567",
+          "name": "V361",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7R8988568",
+          "name": "V362",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8988570",
+          "name": "V363",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8987967",
+          "name": "V364",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G0R8988668",
+          "name": "V365",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G0R8988671",
+          "name": "V366",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXR8989021",
+          "name": "V367",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0R8989030",
+          "name": "V368",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6R8989033",
+          "name": "V369",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8R8989034",
+          "name": "V370",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G1R8989036",
+          "name": "V371",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5R8989038",
+          "name": "V372",
+          "service_status": "-",
+          "service_subscriptions": "-"
+        },
+        {
+          "vin": "YV2XBZ0G2R8989045",
+          "name": "V373",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8993291",
+          "name": "V388",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G9S8993292",
+          "name": "V389",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G0S8993293",
+          "name": "V390",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G2S8993294",
+          "name": "V391",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G4S8993295",
+          "name": "V392",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    },
+    "Sasti": {
+      "count": 19,
+      "vehicles": [
+        {
+          "vin": "YV2XBZ0G5S8994987",
+          "name": "V 502",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G7S8994988",
+          "name": "V 503",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G8S8995549",
+          "name": "V 590",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G6S8994982",
+          "name": "V-500",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0GXS8994984",
+          "name": "V-501",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5T8996903",
+          "name": "V-603",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8996904",
+          "name": "V-604",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8996905",
+          "name": "V-605",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8996911",
+          "name": "V-606",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8902698",
+          "name": "V944",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902701",
+          "name": "V945",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G9T8902702",
+          "name": "V946",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G0T8902703",
+          "name": "V947",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G2T8902704",
+          "name": "V948",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8901316",
+          "name": "V949",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8902693",
+          "name": "V950",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7T8902696",
+          "name": "V952",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G4T8902848",
+          "name": "V956",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G8T8902867",
+          "name": "V957",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        }
+      ]
+    }
+  }
+}

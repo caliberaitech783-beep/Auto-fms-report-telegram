@@ -70,7 +70,7 @@ class RecoveryPlanningTests(unittest.TestCase):
         shifts = json.loads(SHIFTS_FILE.read_text())
         with tempfile.TemporaryDirectory() as directory:
             jobs = plan_missing_reports(when('2026-10-23T03:00:00'),
-                       ['Sasti','Majri','Jayant East','Jayant West'], shifts, Path(directory))
+                       ['Sasti','Majri','Jayant East','Jayant West Top'], shifts, Path(directory))
         self.assertEqual(len(jobs), 4)
         for job in jobs:
             self.assertEqual(job['shift'], 'C')

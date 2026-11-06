@@ -43,9 +43,8 @@ def _fmt(v):
 def _sum_hhmm(mins):
     return f"{int(mins)//60}:{int(mins)%60:02d}"
 
-def normalize_and_filter_rows(source_rows, thresholds=None):
-    """Normalize API rows and apply eligibility rules before any calculations."""
-    thr = thresholds or _thr()
+def normalize_rows(source_rows):
+    """Retain every assigned vehicle, including missing-data and inactive rows."""
     # Normalize the direct API row names to the established portrait report
     # schema used by the attached browser-generated reference PDF.
     normalized = []
@@ -58,6 +57,9 @@ def normalize_and_filter_rows(source_rows, thresholds=None):
             total_min = 0
         normalized.append({
             "name": source.get("Vehicle"), "drivers": source.get("Driver") or "Unknown",
+            "vin": source.get('_vin', ''),
+            "data_status": source.get('_data_status') or (
+                'No API history for this period' if not total and source.get('Driving km') in (None, '') else ''),
             "total_hhmm": total, "total_min": total_min,
             "driving_km": source.get("Driving km"), "diesel_l": source.get("Diesel litres"),
             "kmpl": source.get("Avg km/l"), "standstill_pct": source.get("Standstill %"),
@@ -67,12 +69,20 @@ def normalize_and_filter_rows(source_rows, thresholds=None):
             "engineload_pct": source.get("Engine load %"), "coasting_pct": source.get("Coasting %"),
             "lph": source.get("Avg l/h"),
         })
-    return [
-        row for row in normalized
-        if (row.get("total_min") or 0) >= thr["MIN_ENGINE_MIN"]
+    return normalized
+
+
+def is_operating(row, thresholds=None):
+    thr = thresholds or _thr()
+    return (not row.get('data_status')
+        and (row.get("total_min") or 0) >= thr["MIN_ENGINE_MIN"]
         and _n(row.get("driving_km")) is not None
-        and _n(row.get("driving_km")) >= thr["MIN_DRIVING_KM"]
-    ]
+        and _n(row.get("driving_km")) >= thr["MIN_DRIVING_KM"])
+
+
+def normalize_and_filter_rows(source_rows, thresholds=None):
+    """Activity rules define the performance table, not fleet membership."""
+    return [row for row in normalize_rows(source_rows) if is_operating(row, thresholds)]
 
 
 def fleet_average_speed(rows):
@@ -92,8 +102,13 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     thr = _thr(); out_dir = out_dir or os.path.join(os.path.dirname(__file__), "output", "pdf")
     os.makedirs(out_dir, exist_ok=True)
 
-    rows = normalize_and_filter_rows(rows, thr)
-    if not rows: return None
+    assigned = normalize_rows(rows)
+    if not assigned: return None
+    rows = [r for r in assigned if is_operating(r, thr)]
+    low_activity = [r for r in assigned if not r['data_status'] and not is_operating(r, thr)]
+    unavailable = [r for r in assigned if r['data_status']]
+    total_vehicles = len(assigned)
+    assert total_vehicles == len(rows) + len(low_activity) + len(unavailable)
 
     kmpls=[_n(r["kmpl"]) for r in rows if _n(r["kmpl"]) and _n(r["kmpl"])>0]
     lphs =[_n(r["lph"])  for r in rows if _n(r["lph"])  and _n(r["lph"]) >0]
@@ -189,7 +204,7 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
          '<font color="#9C0006">&#9632;</font> Coasting &lt;{co}% &nbsp;'
          'Avg Speed = distance / driving hours &nbsp;|&nbsp; '
          'Sorted: Standstill % descending &nbsp;|&nbsp; '
-         'Rows &lt;00:30 or distance &lt;{km:g} km excluded'
+         'Vehicles below 00:30 or {km:g} km appear in Low activity; unavailable data is listed separately'
         ).format(ss=thr["STANDSTILL_FLAG"],el=thr["ENGINELOAD_FLAG"],
                  ec=thr["ECONOMY_FLAG"],co=thr["COASTING_FLAG"],
                  km=thr["MIN_DRIVING_KM"])
@@ -221,7 +236,7 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     meta = Table([[
         Paragraph(f"<b>Date:</b> {date_str}", sub_st),
         Paragraph(f"<b>Period:</b> {period}", sub_st),
-        Paragraph(f"<b>Total vehicles:</b> {N}", sub_st),
+        Paragraph(f"<b>Total vehicles:</b> {total_vehicles}", sub_st),
     ]], colWidths=[115, 250, 160])
     meta.setStyle(TableStyle([
         ("LEFTPADDING", (0,0), (-1,-1), 0),
@@ -232,6 +247,10 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     ]))
     elems=[Paragraph(f"Driverwise Standstill Tracking | {site} | Shift {shift}", title_st),
            Spacer(1,3), meta, Spacer(1,10)]
+    elems.append(Paragraph(f'<b>Operating:</b> {N} &nbsp;|&nbsp; '
+                           f'<b>Low activity:</b> {len(low_activity)} &nbsp;|&nbsp; '
+                           f'<b>API data unavailable:</b> {len(unavailable)}', sub_st))
+    elems.append(Spacer(1,6))
     kpi=(f'<b>Idling (Standstill &gt;{thr["STANDSTILL_FLAG"]}%):</b> {len(idle)} of {N} '
          f'&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <b>Above economy &gt;{thr["ECONOMY_FLAG"]}%:</b> {len(econ_hits)}')
     elems.append(Paragraph(kpi, kpi_st))
@@ -250,11 +269,38 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     # Continue directly after the page-1 summary. ReportLab splits the table
     # naturally across pages only when the remaining space is exhausted.
     elems.append(Spacer(1,10))
-    elems.append(Paragraph(f"Vehicle-wise Detail | {site} | Shift {shift}", h2))
+    elems.append(Paragraph(f"Operating Vehicle Detail | {site} | Shift {shift}", h2))
     elems.append(Spacer(1,6))
-    elems.append(table)
+    if rows:
+        elems.append(table)
+    else:
+        elems.append(Paragraph('No vehicles met the operating activity thresholds for this period.', sub_st))
     elems.append(Spacer(1,6))
     elems.append(Paragraph(leg, ParagraphStyle("l",parent=styles["Normal"],fontSize=6.5,leading=8)))
+
+    def coverage_table(section_rows, label, explanation):
+        if not section_rows:
+            return
+        elems.extend([Spacer(1,12),Paragraph(f'{label} ({len(section_rows)})',h2),
+                      Spacer(1,4),Paragraph(explanation,sub_st),Spacer(1,5)])
+        headings = ['Vehicle','VIN','Driver','Report status','Engine time','Distance (km)']
+        details = [[_wrap(h,True) for h in headings]]
+        for row in sorted(section_rows, key=lambda r: str(r.get('name') or '')):
+            status = row['data_status'] or 'Below 30 minutes runtime or 15 km distance'
+            details.append([_wrap(row['name']),_wrap(row['vin']),_wrap(row['drivers']),
+                            _wrap(status),_wrap(row['total_hhmm'] or '-'),_wrap(_fmt(row['driving_km']))])
+        grid=Table(details,colWidths=[48,128,88,160,48,48],repeatRows=1)
+        grid.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#E7EEF6')),
+            ('GRID',(0,0),(-1,-1),0.3,colors.grey),('VALIGN',(0,0),(-1,-1),'TOP'),
+            ('TOPPADDING',(0,0),(-1,-1),3),('BOTTOMPADDING',(0,0),(-1,-1),3)]))
+        elems.append(grid)
+
+    coverage_table(low_activity,'Low activity vehicles',
+                   'Assigned vehicles below the activity thresholds are included here. '
+                   'Their values are excluded from operating performance averages.')
+    coverage_table(unavailable,'API data unavailable',
+                   'These vehicles are assigned to this site. Their API history is unavailable '
+                   'or insufficient for this period; missing values are shown as a dash.')
 
     # --- render with footer page numbers ---
     stub=report_filename(site, shift, start_dt, end_dt)
@@ -267,5 +313,7 @@ def build_pdf(rows, site, shift, start_dt, end_dt, out_dir=None):
     doc=SimpleDocTemplate(path, pagesize=A4,
         leftMargin=8*mm, rightMargin=8*mm, topMargin=8*mm, bottomMargin=10*mm)
     doc.build(elems, onFirstPage=footer, onLaterPages=footer)
-    return {"pdf":path, "vehicles":N, "avg_kmpl":round(avg_kmpl,2), "avg_lph":round(avg_lph,2),
+    return {"pdf":path, "vehicles":total_vehicles, 'operating_vehicles':N,
+            'low_activity_vehicles':len(low_activity), 'unavailable_vehicles':len(unavailable),
+            "avg_kmpl":round(avg_kmpl,2), "avg_lph":round(avg_lph,2),
             "idling":len(idle)}
