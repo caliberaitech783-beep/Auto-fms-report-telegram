@@ -75,7 +75,7 @@ class RecoveryPlanningTests(unittest.TestCase):
         for job in jobs:
             self.assertEqual(job['shift'], 'C')
             self.assertEqual(job['start'].date().isoformat(), '2026-10-22')
-            self.assertEqual(job['start'].hour, 20 if 'Jayant' in job['site'] else 21)
+            self.assertEqual(job['start'].hour, 20 if 'Jayant' in job['site'] or job['site'] == 'Majri' else 21)
             self.assertEqual(job['cutoff'], when('2026-10-23T03:00:00'))
 
     def test_cutover_excludes_earlier_reports(self):
