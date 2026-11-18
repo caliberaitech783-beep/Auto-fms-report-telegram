@@ -138,6 +138,8 @@ class FleetCache:
 def reconcile_inventory(config, inventory, sites, allow_prefix=False):
     """Retain authoritative saved mappings; never guess a VIN's destination."""
     config = json.loads(json.dumps(config))
+    # Volvo's inventory endpoint does not expose the export's service status.
+    allow_prefix = allow_prefix and not config.get('_active_only')
     known = {v['vin']: site for site, node in config['sites'].items()
              for v in node.get('vehicles', []) if v.get('vin') and site in sites}
     pending = []

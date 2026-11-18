@@ -214,6 +214,8 @@ def sync_assignment_manifest(config_path, config, shifts, manifest_path, logger=
             vin = str(item.get('vin') or '').strip().upper()
             if len(vin) != 17 or vin in seen:
                 raise ValueError('Invalid or duplicate VIN in assignment manifest')
+            if manifest.get('active_only') and item.get('service_status') != 'Active':
+                raise ValueError('Non-active vehicle in an Active-only assignment manifest')
             seen.add(vin)
             vehicles.append({**previous.get(vin, {}), **item, 'vin': vin})
         if not vehicles or node.get('count') != len(vehicles):
@@ -223,7 +225,8 @@ def sync_assignment_manifest(config_path, config, shifts, manifest_path, logger=
     info = {'source': manifest['source_file'], 'source_sha256': manifest['source_sha256'],
             'effective_date': manifest['effective_date'], 'sha256': digest,
             'counts': {site: node['count'] for site, node in sites.items()}, 'mapped': len(seen)}
-    updated = {**config, 'sites': sites, '_asset_sync': info, '_assignment_revision': digest}
+    updated = {**config, 'sites': sites, '_asset_sync': info, '_assignment_revision': digest,
+               '_active_only': bool(manifest.get('active_only'))}
     temporary = config_path.with_suffix('.json.tmp')
     temporary.write_text(json.dumps(updated, indent=2), encoding='utf-8')
     temporary.replace(config_path)

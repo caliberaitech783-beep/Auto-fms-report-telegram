@@ -1,12 +1,43 @@
 {
   "schema_version": 1,
-  "effective_date": "2026-11-04",
-  "source_file": "Caliber Mercantile - assets - 2026-11-04.xlsx",
-  "source_sha256": "db8710f80bd901504bac94ac949aa76bd09c28aa49817293dd930b45da04fc16",
+  "effective_date": "2026-11-18",
+  "source_file": "Caliber Mercantile - assets - 2026-11-18.xlsx",
+  "source_sha256": "14a5148178319e839ce6ca9215767397b99af3458816d2914dd0f9ad8b83548a",
+  "active_only": true,
   "sites": {
     "Dhoptala": {
-      "count": 30,
+      "count": 35,
       "vehicles": [
+        {
+          "vin": "YV2XG30G6T8902964",
+          "name": "V 1002",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30GXT8902966",
+          "name": "V 1003",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G1T8902967",
+          "name": "V 1004",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G5V8902974",
+          "name": "V 1005",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XG30G7V8902975",
+          "name": "V 1006",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
         {
           "vin": "YV2XBZ0G0R8986516",
           "name": "V 331",
@@ -160,7 +191,7 @@
         {
           "vin": "YV2XG30G0V8902977",
           "name": "V 984",
-          "service_status": "-",
+          "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
         },
         {
@@ -190,7 +221,7 @@
       ]
     },
     "Dudhichua East": {
-      "count": 164,
+      "count": 155,
       "vehicles": [
         {
           "vin": "YV2XG30G3T8900735",
@@ -259,12 +290,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G3T8901996",
-          "name": "V-891-901996",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XG30G1T8902001",
           "name": "V-896",
           "service_status": "Active",
@@ -307,22 +332,10 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G3T8902257",
-          "name": "V-917-902257",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XG30G1T8902404",
           "name": "V-921",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XG30G7T8902410",
-          "name": "V-925-902410",
-          "service_status": "-",
-          "service_subscriptions": "-"
         },
         {
           "vin": "YV2XG30GXT8900392",
@@ -715,12 +728,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G2T8901519",
-          "name": "V830",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XG30G9T8901520",
           "name": "V831",
           "service_status": "Active",
@@ -745,12 +752,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G6T8901524",
-          "name": "V835",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XG30G8T8901525",
           "name": "V836",
           "service_status": "Active",
@@ -769,12 +770,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G3T8901528",
-          "name": "V839",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XG30G5T8901529",
           "name": "V840",
           "service_status": "Active",
@@ -785,18 +780,6 @@
           "name": "V841",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XG30G3T8901531",
-          "name": "V842",
-          "service_status": "-",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XG30G7T8901533",
-          "name": "V844",
-          "service_status": "-",
-          "service_subscriptions": "-"
         },
         {
           "vin": "YV2XG30G2T8901536",
@@ -1153,12 +1136,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G8T8902545",
-          "name": "V933-902545",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XG30GXT8902546",
           "name": "V934-902546",
           "service_status": "Active",
@@ -1179,7 +1156,7 @@
       ]
     },
     "Dudhichua West": {
-      "count": 118,
+      "count": 117,
       "vehicles": [
         {
           "vin": "YV2XBZ0GXS8994175",
@@ -1686,24 +1663,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G5S8994424",
-          "name": "DEMO-10(1)",
-          "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G3S8994423",
-          "name": "DEMO-9",
-          "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XG30G1T8997224",
-          "name": "DEMO-9(2)",
-          "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
           "vin": "YV2XBZ0G5S8994990",
           "name": "V 505",
           "service_status": "Active",
@@ -1731,12 +1690,6 @@
           "vin": "YV2XBZ0G9S8994264",
           "name": "V422",
           "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G7S8994361",
-          "name": "V429",
-          "service_status": "-",
           "service_subscriptions": "Fuel & Environment"
         },
         {
@@ -1860,6 +1813,12 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
+          "vin": "YV2XG30G1T8997224",
+          "name": "V640",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
           "vin": "YV2XG30GXT8997223",
           "name": "V640",
           "service_status": "Active",
@@ -1888,11 +1847,23 @@
           "name": "V644",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G3S8994423",
+          "name": "V805",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
+        },
+        {
+          "vin": "YV2XBZ0G5S8994424",
+          "name": "V806",
+          "service_status": "Active",
+          "service_subscriptions": "Fuel & Environment"
         }
       ]
     },
     "Gouri": {
-      "count": 132,
+      "count": 131,
       "vehicles": [
         {
           "vin": "YV2XG30GXT8900389",
@@ -2191,12 +2162,6 @@
         {
           "vin": "YV2XG30G1T8998048",
           "name": "V 669",
-          "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XG30GXT8998050",
-          "name": "V 670",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
         },
@@ -2689,7 +2654,7 @@
       ]
     },
     "Jayant East": {
-      "count": 66,
+      "count": 63,
       "vehicles": [
         {
           "vin": "YV2XBZ0G9P8984700",
@@ -2758,12 +2723,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G8R8985632",
-          "name": "V287",
-          "service_status": "-",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
           "vin": "YV2XBZ0G3R8985635",
           "name": "V290",
           "service_status": "Active",
@@ -2803,12 +2762,6 @@
           "vin": "YV2XBZ0G1R8986038",
           "name": "V303",
           "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G4R8986213",
-          "name": "V305",
-          "service_status": "-",
           "service_subscriptions": "Fuel & Environment"
         },
         {
@@ -3058,12 +3011,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G7S8993307",
-          "name": "V403",
-          "service_status": "-",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
           "vin": "YV2XBZ0G9S8993308",
           "name": "V404",
           "service_status": "Active",
@@ -3090,7 +3037,7 @@
       ]
     },
     "Jayant Hard Bench": {
-      "count": 48,
+      "count": 39,
       "vehicles": [
         {
           "vin": "YV2XBZ0G0P8976596",
@@ -3121,60 +3068,6 @@
           "name": "V121",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XTY0G6P8977467",
-          "name": "V136",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G1P8977473",
-          "name": "V137",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G9P8977477",
-          "name": "V138",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G9P8977480",
-          "name": "V139",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G6P8977484",
-          "name": "V140",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G8P8977485",
-          "name": "V141",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0GXP8977486",
-          "name": "V142",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G1P8977487",
-          "name": "V143",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XTY0G3P8977488",
-          "name": "V144",
-          "service_status": "-",
-          "service_subscriptions": "-"
         },
         {
           "vin": "YV2XBZ0G4P8978271",
@@ -3383,7 +3276,7 @@
       ]
     },
     "Jayant West Top": {
-      "count": 106,
+      "count": 99,
       "vehicles": [
         {
           "vin": "YV2XG30G9T8900738",
@@ -3614,12 +3507,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XG30G2T8902962",
-          "name": "V1000-902962",
-          "service_status": "-",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
           "vin": "YV2XBZ0G3P8984689",
           "name": "V203",
           "service_status": "Active",
@@ -3704,12 +3591,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G7R8985041",
-          "name": "V236",
-          "service_status": "-",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
           "vin": "YV2XBZ0G0R8985043",
           "name": "V237",
           "service_status": "Active",
@@ -3755,12 +3636,6 @@
           "vin": "YV2XBZ0G0R8985625",
           "name": "V280",
           "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G4R8985627",
-          "name": "V282",
-          "service_status": "-",
           "service_subscriptions": "Fuel & Environment"
         },
         {
@@ -3872,12 +3747,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0GXR8988676",
-          "name": "V376",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XBZ0G3R8988678",
           "name": "V377",
           "service_status": "Active",
@@ -3894,12 +3763,6 @@
           "name": "V379",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G1R8989022",
-          "name": "V380",
-          "service_status": "-",
-          "service_subscriptions": "-"
         },
         {
           "vin": "YV2XBZ0G3R8989023",
@@ -3924,12 +3787,6 @@
           "name": "V385",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G2R8989031",
-          "name": "V386",
-          "service_status": "-",
-          "service_subscriptions": "-"
         },
         {
           "vin": "YV2XBZ0G8S8993297",
@@ -3965,12 +3822,6 @@
           "vin": "YV2XBZ0G0S8993410",
           "name": "V410",
           "service_status": "Active",
-          "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G4S8993412",
-          "name": "V411",
-          "service_status": "-",
           "service_subscriptions": "Fuel & Environment"
         },
         {
@@ -4024,7 +3875,7 @@
       ]
     },
     "Majri": {
-      "count": 92,
+      "count": 86,
       "vehicles": [
         {
           "vin": "YV2XBZ0G2S8994798",
@@ -4393,12 +4244,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G6R8986519",
-          "name": "V334",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XBZ0G2R8986520",
           "name": "V335",
           "service_status": "Active",
@@ -4441,18 +4286,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G0R8987956",
-          "name": "V356",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XBZ0G8R8988563",
-          "name": "V357",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XBZ0GXR8988564",
           "name": "V358",
           "service_status": "Active",
@@ -4489,18 +4322,6 @@
           "service_subscriptions": "Fuel & Environment"
         },
         {
-          "vin": "YV2XBZ0G5R8987967",
-          "name": "V364",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
-          "vin": "YV2XBZ0G0R8988668",
-          "name": "V365",
-          "service_status": "-",
-          "service_subscriptions": "-"
-        },
-        {
           "vin": "YV2XBZ0G0R8988671",
           "name": "V366",
           "service_status": "Active",
@@ -4535,12 +4356,6 @@
           "name": "V371",
           "service_status": "Active",
           "service_subscriptions": "Fuel & Environment"
-        },
-        {
-          "vin": "YV2XBZ0G5R8989038",
-          "name": "V372",
-          "service_status": "-",
-          "service_subscriptions": "-"
         },
         {
           "vin": "YV2XBZ0G2R8989045",

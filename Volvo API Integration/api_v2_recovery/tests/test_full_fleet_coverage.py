@@ -9,11 +9,11 @@ import unittest
 from pypdf import PdfReader
 from api_pdf_report import build_pdf
 from asset_group_sync import sync_asset_groups
-from fleet_cache import FleetCache
+from fleet_cache import FleetCache, reconcile_inventory
 
 BASE = Path(__file__).resolve().parents[1]
-COUNTS = {'Dhoptala':30,'Dudhichua East':164,'Dudhichua West':118,'Gouri':132,
-          'Jayant East':66,'Jayant Hard Bench':48,'Jayant West Top':106,'Majri':92,'Sasti':19}
+COUNTS = {'Dhoptala':35,'Dudhichua East':155,'Dudhichua West':117,'Gouri':131,
+          'Jayant East':63,'Jayant Hard Bench':39,'Jayant West Top':99,'Majri':86,'Sasti':19}
 
 
 def coverage_rows():
@@ -42,9 +42,15 @@ class FullFleetTests(unittest.TestCase):
             config.write_text(json.dumps({'sites':{'Sasti':{'vehicles':[]}}}))
             current, info=sync_asset_groups(config,json.loads((BASE/'shifts.json').read_text()),root)
             self.assertEqual({s:n['count'] for s,n in current['sites'].items() if s!='Unknown sites'},COUNTS)
-            self.assertEqual(info['mapped'],775)
+            self.assertEqual(info['mapped'],744)
             vins=[v['vin'] for n in current['sites'].values() for v in n['vehicles']]
-            self.assertEqual(len(set(vins)),775)
+            self.assertEqual(len(set(vins)),744)
+            self.assertTrue(all(v['service_status'] == 'Active'
+                                for group in current['sites'].values() for v in group['vehicles']))
+            discovered = {'vin': 'YV2XG30G6T8902852', 'customerVehicleName': 'Sasti New'}
+            reconciled, pending = reconcile_inventory(current, [discovered], ['Sasti'], allow_prefix=True)
+            self.assertEqual(reconciled['sites']['Sasti']['count'], 19)
+            self.assertEqual(pending[0]['vin'], discovered['vin'])
             cache=FleetCache(root/'cache.sqlite3')
             cache.put('site_config',{'sites':{'Sasti':{'vehicles':[{'vin':'STALE'}]}}})
             cache.put('assignment_revision','old')
