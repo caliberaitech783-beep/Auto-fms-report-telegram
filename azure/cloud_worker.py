@@ -102,6 +102,8 @@ def save_cache(container, cache_file):
     target = cache_file.with_suffix('.backup.sqlite3')
     with closing(sqlite3.connect(cache_file)) as source, closing(sqlite3.connect(target)) as backup:
         source.backup(backup)
+        if backup.execute('PRAGMA quick_check').fetchone() != ('ok',):
+            raise sqlite3.DatabaseError('Volvo cache integrity check failed before upload')
     container.upload_blob('cache/volvo/fleet.sqlite3.gz', gzip.compress(target.read_bytes()), overwrite=True)
 
 
@@ -239,6 +241,13 @@ def _run_locked(container, ensure_lease):
         if incremental and download(container, 'cache/volvo/fleet.sqlite3.gz', cache_archive):
             cache_file.parent.mkdir(parents=True, exist_ok=True)
             cache_file.write_bytes(gzip.decompress(cache_archive.read_bytes()))
+            try:
+                with closing(sqlite3.connect(cache_file)) as saved:
+                    if saved.execute('PRAGMA quick_check').fetchone() != ('ok',):
+                        raise sqlite3.DatabaseError('Invalid saved Volvo cache')
+            except sqlite3.DatabaseError:
+                LOG.error('Corrupt Volvo cache detected; rebuilding telemetry from the API')
+                cache_file.unlink()
         existing_hashes = {}
         for brand, (folder, _) in PROJECTS.items():
             for blob in container.list_blobs(name_starts_with=f"pdf/{brand}/"):
