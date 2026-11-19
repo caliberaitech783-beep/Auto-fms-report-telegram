@@ -156,6 +156,9 @@ def run():
         lock.upload_blob(b'', overwrite=False)
     except ResourceExistsError:
         pass
+    except HttpResponseError as exc:
+        if exc.status_code not in (409, 412):
+            raise
     try:
         lease = lock.acquire_lease(lease_duration=60)
     except HttpResponseError as exc:
